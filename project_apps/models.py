@@ -9,6 +9,11 @@ class Users(models.Model):
 class Courses(models.Model):
     courseName = models.CharField(max_length=25)
 
+class Labs(models.Model):
+    courseName = models.CharField(max_length=25)
+    labNum = models.intField(max_length=4)
+
+
 
 
 
