@@ -15,13 +15,24 @@ class Labs(models.Model):
 class ContactPhone(models.Model):
     phoneNum = models.intField(max_length=10)
 
-    def __init__(self):
-        return self.phoneNum
+    def __init__(self, num):
+        self.phoneNum = num
 
+    def set(self, num):
+        self.phoneNum = num
+
+    def get(self):
+        return self.phoneNum
 class ContactEmail(models.Model):
     email = models.CharField(max_length=25)
 
-    def __init__(self):
+    def __init__(self, email):
+        self.email = email
+
+    def set(self, email):
+        self.email = email
+
+    def get(self):
         return self.email
 
 
