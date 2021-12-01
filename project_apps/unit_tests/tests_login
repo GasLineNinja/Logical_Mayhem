@@ -5,7 +5,7 @@ from project_apps.models import Users
 class Test_Login(TestCase):
     def setup(self):
         self.client = Client()
-        self.user = Users.object.create(name='user1', password='password')
+        self.users = Users.object.create(name='user1', password='password')
 
     def test_successfulLogin(self):
         response = self.client.post('/', {'name:', 'user1', 'password:', 'password'})
