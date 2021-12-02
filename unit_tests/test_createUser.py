@@ -1,12 +1,10 @@
-from django.test import TestCase
-from django.test import Client
-from project_apps.models import Users, Courses, Labs
+import unittest
 
 
-class TestCreateAccount(TestCase):
-    def success(self):
+class MyTestCase(unittest.TestCase):
+    def test_something(self):
         self.assertEqual(True, False)  # add assertion here
 
-    def failure(self):
-        self.assertequal(True, False)
 
+if __name__ == '__main__':
+    unittest.main()
