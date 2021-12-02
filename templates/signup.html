@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>385 Final Project</title>
+	<style type="text/css">
+		body{
+			background: lightgrey;
+		}
+		.formheader{
+			width: 800px;
+			background-color: rgb(0,0,0,.6);
+			margin: auto;
+			color: #FFFFFF;
+			padding: 10px 0px 10px 0px;
+			text-align: center;
+			border-radius: 15px 15px 0px 0px;
+		}
+		.mainform{
+			background-color: rgb: (0,0,0,0.5);
+			width: 800px;
+			margin: auto;
+			text-align: left;
+		}
+		form{
+			font-size: 20px;
+		}
+		label, input{
+			display: inline-block;
+		}
+		label{
+			width: 300px;
+		}
+		.users{
+			font-style: oblique;
+			font-weight: 700;
+		}
+	</style>
+</head>
+<body>
+	<div class="formheader"><h3>Please create an account or <a href="login.php">Login</a></h3></div>
+	<div class="mainform">
+		<form action="/" method="post">
+            {% csrf_token %}
+			<fieldset>
+				<p><label class="username">Username:   </label><input type="text" name="username" size="25"></p>
+				<p><label class="password">Password:   </label><input type="password" name="pass1" size ="25"></p>
+				<p><label class="cpassword">Confirm Password:   </label><input type="password" name="pass2" size="25" value=""></p>
+
+			</fieldset>
+				<input type="submit" name="submit" value="Submit">
+		</form>
+        {{ message }}
+	</div>
+	</body>
+	</html>
