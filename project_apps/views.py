@@ -7,5 +7,6 @@ from .models import Users, Courses
 class Sign_up(View):
 
     def get(self,request):
-        return render(request, "../../final_project/templates/signup.html",{})
+        return render(request, "signup.html",{})
 
+    #def post(self,request):
