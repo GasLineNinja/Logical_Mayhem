@@ -3,7 +3,7 @@ from django.test import Client
 from project_apps.models import Users, Courses, Labs
 
 
-class MyTestCase(TestCase):
+class test_viewData(TestCase):
     def setup(self):
         self.client = Client()
         self.user1 = Users.objects.create(userName='mdstrand', password='12345', firstName='Michael',
@@ -26,17 +26,23 @@ class MyTestCase(TestCase):
         self.lab3 = Labs.objects.create(courseName='CompSci 361 Intro to Software Engineering', labNum='902',
                                         labTime='TH 11:00a')
 
-    def viewUsersAdmin(self):
-        response1 = self.user1.post('/', {'username:', 'sghost', 'First name:', 'Space', 'Last name:', 'Ghost',
-                                         'email:', 'coasttocoast@uwm.edu', 'group:', 'Instructor', 'Course:',
-                                         'CompSci 337 Systems Programming'})
+    def viewDataAdmin(self):
+        response = self.user1.post('/', {'username:', 'sghost'})
+        self.assertEquals(response.url, "/userInfo/")
 
-        response2 = self.user1.post('/', {'username:', 'hbirdman', 'First name:', 'Harvey', 'Last name:',
-                                          'Birdman', 'email:', 'attorneyatlaw@uwm.edu', 'group:', 'TA', 'Course:',
-                                          'CompSci 361 Intro to Software Engineering', 'Lab:', '902'})
+        response = self.user1.post('/', {'username:', 'hdirdman'})
+        self.assertEquals(response.url, "/userInfo/")
 
-    def viewUsersInstructors(self):
-        pass
+    def viewDataInstructors(self):
+        response = self.user2.post('/', {'username:', 'hbirdman'})
+        self.assertEqual(response.context['message'], "You are not authorized to view content")
 
-    def viewUsersTa(self):
-        pass
+        response = self.user2.post('/', {'username:', 'mdstrand'})
+        self.assertEqual(response.context['message'], "You are not authorized to view content")
+
+    def viewDataTa(self):
+        response = self.user3.post('/', {'username:', 'mdstrand'})
+        self.assertEqual(response.context['message'], "You are not authorized to view content")
+
+        response = self.user3.post('/', {'username:', 'sghost'})
+        self.assertEqual(response.context['message'], "You are not authorized to view content")
