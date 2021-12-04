@@ -10,6 +10,7 @@ class Users(models.Model):
     lastName = models.CharField(max_length=25)
     email = models.CharField(max_length=50)
     group = models.CharField(max_length=25)
+    userID = models.intField(max_length=10)
 
 class Courses(models.Model):
     courseName = models.CharField(max_length=25)

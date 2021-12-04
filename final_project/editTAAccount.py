@@ -1,7 +1,7 @@
 from editaccounts import EditAccountsInterface
 
 class EditTAAccount(EditAccountsInterface):
-    def editAccount(userID):
+    def editAccount(userID: int, group: str):
         #Precondition: check isAdmin is true
         #Precondition: enter the right userID, username, and password
         #Postcondition: the user can make any edits for the account

@@ -2,13 +2,18 @@ from final_project.createTAccount import CreateTAAccount
 from project_apps.models import Users
 from django.test import Client
 import unittest
+from final_project.isAdmin import isAdmin
 
 class TestGetAccount(unittest.TestCase):
     def setUp(self):
         self.client = Client()
-        self.TAUser = Users.objects.create(userName = 'TA1', password = 'YayTA', firstName = 'First', lastName = 'Last', email = 'ottmakai000@gmail.com', group = 'TA')
-        self.InstructorUser = Users.objects.create(userName='Instructor1', password='YayInstructor', firstName='First', lastName='Last', email='krottman@uwm.edu', group='Instructor')
-        self.AdministratorUser = Users.objects.create(userName='Admin1', password = 'YayAdmin', firstName='First', lastName='Last', email='littleotterocean@gmail.com', group="Administrator")
+        self.TAUser = Users.objects.create(userName='TA1', password='YayTA', firstName='First', lastName='Last',
+                                           email='ottmakai000@gmail.com', group='TA', userID=3)
+        self.InstructorUser = Users.objects.create(userName='Instructor1', password='YayInstructor', firstName='First',
+                                                   lastName='Last', email='krottman@uwm.edu', group='Instructor', userID=2)
+        self.AdministratorUser = Users.objects.create(userName='Admin1', password='YayAdmin', firstName='First',
+                                                      lastName='Last', email='littleotterocean@gmail.com',
+                                                      group="Administrator", userID=1)
 
     def test_falseCreateNewAccount(self):
         pass
@@ -21,7 +26,7 @@ class TestGetAccount(unittest.TestCase):
         pass
 
     def test_notAdminRequest(self):
-        self.assertEqual(False, isAdmin(AdministratorUser))
+        pass
 
     def test_accountCreated(self):
         pass
