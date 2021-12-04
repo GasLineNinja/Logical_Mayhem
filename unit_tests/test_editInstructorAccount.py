@@ -1,5 +1,8 @@
 from final_project import editInstructorAccount
 import unittest
+from project_apps.models import Users
+from django.test import Client
+import unittest
 
 class TestEditInstructorAccount(unittest.TestCase):
     def setUp(self):
