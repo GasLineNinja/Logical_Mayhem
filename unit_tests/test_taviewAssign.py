@@ -1,6 +1,6 @@
 from numpy import msg
 
-from final_project import AdminviewAssign
+from final_project import taViewAssign
 from django.test import TestCase
 from django.test import Client
 from project_apps.models import Users, Courses, CourseAssign
