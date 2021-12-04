@@ -48,3 +48,8 @@ class Labs(models.Model):
     taName = models.CharField(max_length=50)
 
 
+class CourseAssign(models.Model):
+    courseName = models.CharField(max_length=100)
+    assignmentNum = models.IntegerField()
+    assignment = models.CharField(max_length=50)
+    assignment1 = models.CharField(max_length=50)
