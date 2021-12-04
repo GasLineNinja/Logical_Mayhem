@@ -1,2 +1,98 @@
-from final_project import createTAccount
+from final_project.createTAccount import CreateTAAccount
+from project_apps.models import Users
+from django.test import Client
 import unittest
+
+class TestGetAccount(unittest.TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.TAUser = Users.objects.create(userName = 'TA1', password = 'YayTA', firstName = 'First', lastName = 'Last', email = 'ottmakai000@gmail.com', group = 'TA')
+        self.InstructorUser = Users.objects.create(userName='Instructor1', password='YayInstructor', firstName='First', lastName='Last', email='krottman@uwm.edu', group='Instructor')
+        self.AdministratorUser = Users.objects.create(userName='Admin1', password = 'YayAdmin', firstName='First', lastName='Last', email='littleotterocean@gmail.com', group="Administrator")
+
+    def test_falseCreateNewAccount(self):
+        pass
+
+    def test_trueCreateNewAccount(self):
+        pass
+
+    def test_adminRequest(self):
+        #use isAdmin
+        pass
+
+    def test_notAdminRequest(self):
+        self.assertEqual(False, isAdmin(AdministratorUser))
+
+    def test_accountCreated(self):
+        pass
+
+    def test_accountNotCreated(self):
+        pass
+
+class TestCreateAccount(unittest.TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.TAUser = Users.objects.create(userName = 'TA1', password = 'YayTA', firstName = 'First', lastName = 'Last', email = 'ottmakai000@gmail.com', group = 'TA')
+        self.InstructorUser = Users.objects.create(userName='Instructor1', password='YayInstructor', firstName='First', lastName='Last', email='krottman@uwm.edu', group='Instructor')
+        self.AdministratorUser = Users.objects.create(userName='Admin1', password = 'YayAdmin', firstName='First', lastName='Last', email='littleotterocean@gmail.com', group="Administrator")
+
+    def test_getAccountNotTrue(self):
+        pass
+    def test_getAccountTrue(self):
+        pass
+
+    def test_createNewAccountTATrue(self):
+        #if only createNewAccountTA is true, then createAccount creates a TA account
+        pass
+
+    def test_createNewAccountInstructorTrue(self):
+        pass
+
+    def test_createNewAccountTAcreateNewAccountInstructorFalse(self):
+        pass
+
+    def test_createNewAccountTAcreateNewAccountInstructorTrue(self):
+        pass
+
+    def test_newTACreated(self):
+        pass
+
+    def test_newTANotCreated(self):
+        pass
+
+    def test_newUsernameGenerated(self):
+        pass
+
+    def test_newUsernameNotGenerated(self):
+        pass
+
+    def test_newPasswordGenerated(self):
+        pass
+
+    def test_newPasswordNotGenerated(self):
+        pass
+
+class test_SaveAccount(unittest.TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.TAUser = Users.objects.create(userName = 'TA1', password = 'YayTA', firstName = 'First', lastName = 'Last', email = 'ottmakai000@gmail.com', group = 'TA')
+        self.InstructorUser = Users.objects.create(userName='Instructor1', password='YayInstructor', firstName='First', lastName='Last', email='krottman@uwm.edu', group='Instructor')
+        self.AdministratorUser = Users.objects.create(userName='Admin1', password = 'YayAdmin', firstName='First', lastName='Last', email='littleotterocean@gmail.com', group="Administrator")
+
+    def test_usernameNotValid(self):
+        pass
+
+    def test_passwordNotValid(self):
+        pass
+
+    def test_usernamePasswordNotValid(self):
+        pass
+
+    def test_usernamePasswordValid(self):
+        pass
+
+    def test_userIDMatchesUsernamePassword(self):
+        pass
+
+    def test_userIDNotMatchesUsernamePassword(self):
+        pass

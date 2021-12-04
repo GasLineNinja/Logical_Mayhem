@@ -1,10 +1,18 @@
 from final_project import editInstructorAccount
 import unittest
+from project_apps.models import Users
+from django.test import Client
+import unittest
 
 class TestEditInstructorAccount(unittest.TestCase):
     def setUp(self):
-        self.isAdminFalse = False
-        self.isAdminTrue = True
+        self.TAUser = Users.objects.create(userName='TA1', password='YayTA', firstName='First', lastName='Last',
+                                           email='ottmakai000@gmail.com', group='TA')
+        self.InstructorUser = Users.objects.create(userName='Instructor1', password='YayInstructor', firstName='First',
+                                                   lastName='Last', email='krottman@uwm.edu', group='Instructor')
+        self.AdministratorUser = Users.objects.create(userName='Admin1', password='YayAdmin', firstName='First',
+                                                      lastName='Last', email='littleotterocean@gmail.com',
+                                                      group="Administrator")
 
     def test_isAdminFalse(self):
         pass
