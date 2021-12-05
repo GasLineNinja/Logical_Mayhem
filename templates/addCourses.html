@@ -93,8 +93,11 @@
 		<form action={% url 'addcourses' %} method="post">
             {% csrf_token %}
 			<fieldset>
+                <p><label class="coursenum">Course number:   </label><input type="text" name="coursenum" min="100"
+                                                                            max="999" size="3"></p>
 				<p><label class="coursename">Course name:   </label><input type="text" name="coursename" size="50"></p>
-				<p><label class="courseday">Course days (U,M,T,W,H,F,S):   </label><input type="text" name="courseday" size ="11"></p>
+				<p><label class="courseday">Course days (U,M,T,W,H,F,S):   </label><input type="text" name="courseday"
+                                                                                          size ="11"></p>
                 <p><label class="coursetime">Course time:   </label><input type="time" name="coursetime" size ="50"></p>
 			</fieldset>
 				<input type="submit" name="submit" value="Submit">

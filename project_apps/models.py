@@ -15,7 +15,8 @@ class Users(models.Model):
 
 class Courses(models.Model):
     courseName = models.CharField(max_length=100)
-    courseTime = models.DateTimeField()
+    courseNum = models.CharField(max_length=4, default=0000)
+    courseTime = models.TimeField()
     courseDay = models.CharField(max_length=15, default=None)
     instructorName = models.CharField(max_length=50)
     taName = models.CharField(max_length=50)

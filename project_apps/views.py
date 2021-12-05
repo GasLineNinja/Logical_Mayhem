@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import Users, Courses
+from .models import Users, Courses, Labs
 
 # Create your views here.
 
-class Sign_up(View):
+class SignUp(View):
 
     # display sing up form
     def get(self, request):
@@ -27,7 +27,8 @@ class Sign_up(View):
         # if new user
         if noUser:
             # get new sign up info
-            m = Users(userName=request.POST['username'], password1=request.POST['pass1'], password2=request.POST['pass2'])
+            m = Users(userName=request.POST['username'], password1=request.POST['pass1'],
+                      password2=request.POST['pass2'])
             p1 = request.POST['pass1']
             p2 = request.POST['pass2']
             # make sure passwords are the same
@@ -67,8 +68,6 @@ class Login(View):
 
         # if new user
         if noUser:
-            #m = Users.objects.get(userName=request.POST['username'])
-            #request.session["username"] = m.userName
             return render(request, "signup.html", {"message": "Username not found. Please create an account."})
         elif badPassword:
             return render(request, "login.html", {"message": "bad password"})
@@ -83,13 +82,44 @@ class Homepage(View):
     def get(self, request):
         return render(request, "homepage.html", {})
 
-class Add_Courses(View):
+class AddCourses(View):
 
     # display add courses page
     def get(self, request):
         return render(request, "addCourses.html", {})
 
-class Add_Users(View):
+    def post(self, request):
+
+        noCourse = False
+
+        # checking if course already exists
+        try:
+            Courses.objects.get(courseName=request.POST['coursename'])
+        except:
+            noCourse = True
+
+        if noCourse:
+            c = Courses(courseName=request.POST['coursename'], courseNum=request.POST['coursenum'],
+                        courseDay=request.POST['courseday'], courseTime=request.POST['coursetime'])
+            c.save()
+            request.session["coursename"] = c.courseName
+            return redirect('addcourses')
+        else:
+            return render(request, "addCourses.html", {"message": "Course already exists."})
+
+class AddUsers(View):
+
+    # display add users page
+    def get(self, request):
+        return render(request, "", {})
+
+class ViewCourses(View):
+
+    # display add users page
+    def get(self, request):
+        return render(request, "", {})
+
+class ViewUsers(View):
 
     # display add users page
     def get(self, request):
