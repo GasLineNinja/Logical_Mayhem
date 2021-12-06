@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <<title>CEAS Course Scheduler</title>
+    <title>CEAS Course Scheduler</title>
     <div class="header">
 		<h1>CEAS Course Scheduler App</h1>
 	</div>
@@ -81,19 +81,30 @@
 	</style>
 </head>
 <body>
-    {% csrf_token %}
     <div class="topnav">
         <div class="topnav-centered">
             <a class="active" href={% url 'homepage' %}>Home</a>
-            <a href="{% url 'addcourses' %}">Add Courses</a>
-            <a href="{% url 'addusers' %}">Add Users</a>
-            <a href="{% url 'viewcourses' %}">View Courses</a>
-            <a href="{% url 'viewusers' %}">View Users</a>
+            <a href="">Edit Courses</a>
+            <a href="">Edit Users</a>
         </div>
     </div>
-    <div class="formheader"><h3>Welcome to the Admin Homepage!</h3>
-        <p>Please choose Add Courses or Add users to continue</p>
-    </div>
-        {% csrf_token %}
-</body>
+	<div class="formheader"><h3>Please fill out user information</h3></div>
+	<div class="mainform">
+		<form action={% url 'addusers' %} method="post">
+            {% csrf_token %}
+			<fieldset>
+                <p><label class="username">Panther ID:   </label><input type="text" name="username" size="25"></p>
+				<p><label class="fname">First name:   </label><input type="text" name="fname" size="25"></p>
+				<p><label class="lname">Last name:   </label><input type="text" name="lname" size ="25"></p>
+                <p><label class="email">Email:   </label><input type="email" name="email" size ="50"></p>
+                <p><label class="temppass">Temporary Password:   </label><input type="text" name="pass1" size="25"></p>
+                <p><input type="radio" name="group" value="Instructor"><label for="" class="instructor">Instructor</label>
+                    <input type="radio" name="group" value="TA"><label class="ta">TA</label></p>
+			</fieldset>
+				<input type="submit" name="submit" value="Submit">
+                <input type="reset" name="reset" value="reset">
+		</form>
+        {{ message }}
+	</div>
+	</body>
 </html>

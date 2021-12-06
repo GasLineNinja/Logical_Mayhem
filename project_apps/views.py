@@ -24,11 +24,13 @@ class SignUp(View):
         except:
             noUser = True
 
+        rowCount = Users.objects.filter(group='Administrator').count()
+
         # if new user
-        if noUser:
+        if rowCount == 0:
             # get new sign up info
             m = Users(userName=request.POST['username'], password1=request.POST['pass1'],
-                      password2=request.POST['pass2'])
+                      password2=request.POST['pass2'], group='Administrator')
             p1 = request.POST['pass1']
             p2 = request.POST['pass2']
             # make sure passwords are the same
@@ -39,12 +41,14 @@ class SignUp(View):
                 m.save()
                 request.session["username"] = m.userName
                 return redirect('login')
+        elif noUser:
+            return redirect('login')
         elif badPassword:
             return render(request, "signup.html", {"message": "bad password"})
         # if user exists redirect to login page
         else:
             request.session["username"] = m.userName
-            return redirect('login')
+            return render(request, "login.html", {"message": "You have an account. Please log in."})
 
 class Login(View):
 
@@ -72,6 +76,9 @@ class Login(View):
         elif badPassword:
             return render(request, "login.html", {"message": "bad password"})
         # if user exists redirect to homepage
+        elif m.group != 'Administrator':
+            request.session["username"] = m.userName
+            return redirect('userhomepage')
         else:
             request.session["username"] = m.userName
             return redirect('homepage')
@@ -81,6 +88,12 @@ class Homepage(View):
     # display homepage
     def get(self, request):
         return render(request, "homepage.html", {})
+
+class UserHomepage(View):
+
+    # display homepage
+    def get(self, request):
+        return render(request, "userHomepage.html", {})
 
 class AddCourses(View):
 
@@ -111,7 +124,27 @@ class AddUsers(View):
 
     # display add users page
     def get(self, request):
-        return render(request, "", {})
+        return render(request, "addUsers.html", {})
+
+    def post(self, request):
+
+        noUser = False
+
+        try:
+            Users.objects.get(userName=request.POST['username'])
+        except:
+            noUser = True
+
+        if noUser:
+            u = Users(userName=request.POST['username'], firstName=request.POST['fname'],
+                      lastName=request.POST['lname'], email=request.POST['email'], password1=request.POST['pass1'],
+                      group=request.POST['group'])
+
+            u.save()
+            request.session["username"] = u.userName
+            return redirect('addusers')
+        else:
+            return render(request, "addUsers.html", {"message": "User already exists"})
 
 class ViewCourses(View):
 
