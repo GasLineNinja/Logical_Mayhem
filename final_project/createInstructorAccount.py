@@ -1,4 +1,4 @@
-from createaccounts import CreateAccountsInterface
+
 
 class CreateInstructorAccount(object, CreateAccountsInterface):
     def getAccount(createNewAccount):
