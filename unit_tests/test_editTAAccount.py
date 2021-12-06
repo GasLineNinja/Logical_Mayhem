@@ -1,4 +1,3 @@
-from final_project import editTAAccount
 import unittest
 from project_apps.models import Users
 from final_project.editTAAccount import EditTAAccount
