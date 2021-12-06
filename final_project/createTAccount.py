@@ -1,7 +1,7 @@
 from createaccounts import CreateAccountsInterface
 
 class CreateTAAccount(CreateAccountsInterface):
-    def getAccount(createNewAccount):
+    def getAccount(self):
         #Precondition: the account holder is an admin
         #Precondition: the createNewAccount is true
         #Postcondition: an account will be created

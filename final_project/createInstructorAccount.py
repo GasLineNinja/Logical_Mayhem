@@ -1,11 +1,12 @@
 from createaccounts import CreateAccountsInterface
 
 class CreateInstructorAccount(CreateAccountsInterface):
-    def getAccount(createNewAccount):
+    def getAccount(self):
         #Precondition: the account holder is an admin
         #Precondition: the createNewAccount is true
         #Postcondition: an account will be created
         #createNewAccount: boolean to see if create account was selected by user or not
+            #Got rid of createNewAccount, doesn't actually seem to be needed
         pass
 
     def createAccount(createNewAccountTA, createNewAccountInstructor, createUser, createPassword):

@@ -1,10 +1,9 @@
 from final_project.editInstructorAccount import EditInstructorAccount
 from final_project.isAdmin import isAdmin
-import unittest
+from django.test import TestCase
 from project_apps.models import Users
-from django.test import Client
 
-class TestEditInstructorAccount(unittest.TestCase):
+class TestEditInstructorAccount(TestCase):
     def setUp(self):
         self.TAUser = Users.objects.create(userName='TA1', password='YayTA', firstName='First', lastName='Last',
                                            email='ottmakai000@gmail.com', group='TA', userID=3)

@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 class CreateAccountsInterface(ABC):
     @abstractmethod
-    def getAccount(createNewAccount):
+    def getAccount(self):
         pass
 
     @abstractmethod

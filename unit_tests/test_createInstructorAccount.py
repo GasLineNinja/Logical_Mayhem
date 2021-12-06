@@ -1,15 +1,14 @@
 from final_project import createInstructorAccount
-import unittest
+from django.test import TestCase
 from project_apps.models import Users
-from django.test import Client
+from final_project.isAdmin import isAdmin
 
 #test for if preconditions aren't met, test if they are
 #test if conditions are given something they aren't expecting
 #look for holes
 
-class TestGetAccount(unittest.TestCase):
+class TestGetAccount(TestCase):
     def setUp(self):
-        self.client = Client()
         self.TAUser = Users.objects.create(userName='TA1', password='YayTA', firstName='First', lastName='Last',
                                            email='ottmakai000@gmail.com', group='TA', userID=3)
         self.InstructorUser = Users.objects.create(userName='Instructor1', password='YayInstructor', firstName='First',
@@ -19,17 +18,20 @@ class TestGetAccount(unittest.TestCase):
                                                       lastName='Last', email='littleotterocean@gmail.com',
                                                       group="Administrator", userID=1)
 
-    def test_falseCreateNewAccount(self):
-        pass
+    def test_isAdminFalseTA(self):
+        self.assertEqual(False, isAdmin.adminPermission(self.TAUser.group),
+                         msg= "test_createInstructorAccount.test_isAdminFalseTA: "
+                              "isAdmin returns TA User as admin")
 
-    def test_trueCreateNewAccount(self):
-        pass
+    def test_isAdminFalseInstructor(self):
+        self.assertEqual(False, isAdmin.adminPermission(self.InstructorUser.group),
+                         msg= "test_createInstructorAccount.test_isAdminFalseInstructor: "
+                              "isAdmin returns Instructor User as admin")
 
-    def test_adminRequest(self):
-        pass
-
-    def test_notAdminRequest(self):
-        pass
+    def test_isAdminTrue(self):
+        self.assertEqual(True, isAdmin.adminPermission(self.AdministratorUser.group),
+                         msg= "test_createInstructorAccount.test_isAdminTrue: "
+                              "isAdmin returns Admin User as not admin")
 
     def test_accountCreated(self):
         pass
@@ -37,7 +39,7 @@ class TestGetAccount(unittest.TestCase):
     def test_accountNotCreated(self):
         pass
 
-class TestCreateAccount(unittest.TestCase):
+class TestCreateAccount(TestCase):
     def setUp(self):
         pass
 
@@ -77,7 +79,7 @@ class TestCreateAccount(unittest.TestCase):
     def test_newPasswordNotGenerated(self):
         pass
 
-class test_SaveAccount(unittest.TestCase):
+class test_SaveAccount(TestCase):
     def test_usernameNotValid(self):
         pass
 
