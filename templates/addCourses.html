@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>CEAS Course Scheduler</title>
+    <meta charset="UTF-8">
+    <title>CEAS Course Scheduler</title>
     <div class="header">
 		<h1>CEAS Course Scheduler App</h1>
 	</div>
@@ -82,25 +82,27 @@
 </head>
 <body>
     <div class="topnav">
-	<!--<div class="topnav-centered">
-		<a class="active" href={% url 'signup' %}>Home</a>
-		<a href="">Courses</a>
-		<a href="">Users</a>
-	</div>-->
+	<div class="topnav-centered">
+		<a class="active" href={% url 'homepage' %}>Home</a>
+		<a href={% url 'editcourses' %}>Edit Courses</a>
+		<a href={% url 'addusers' %}>Add Users</a>
+	</div>
     </div>
-	<div class="formheader"><h3>Please create an account or <a href={% url 'login' %}>Login</a></h3></div>
+	<div class="formheader"><h3>Please fill out course information</h3></div>
 	<div class="mainform">
-		<form action={% url 'signup' %} method="post">
+		<form action={% url 'addcourses' %} method="post">
             {% csrf_token %}
 			<fieldset>
-				<p><label class="username">Username:   </label><input type="text" name="username" size="25"></p>
-				<p><label class="password">Password:   </label><input type="password" name="pass1" size ="25"></p>
-				<p><label class="cpassword">Confirm Password:   </label><input type="password" name="pass2" size="25" value=""></p>
-
+                <p><label class="coursenum">Course number:   </label><input type="text" name="coursenum" min="100"
+                                                                            max="999" size="3"></p>
+				<p><label class="coursename">Course name:   </label><input type="text" name="coursename" size="50"></p>
+				<p><label class="courseday">Course days (U,M,T,W,H,F,S):   </label><input type="text" name="courseday"
+                                                                                          size ="11"></p>
+                <p><label class="coursetime">Course time:   </label><input type="time" name="coursetime" size ="50"></p>
 			</fieldset>
 				<input type="submit" name="submit" value="Submit">
 		</form>
         {{ message }}
 	</div>
 	</body>
-	</html>
+</html>
