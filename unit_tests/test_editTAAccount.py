@@ -1,4 +1,3 @@
-from final_project import editTAAccount
 import unittest
 
 class TestEditInstructorAccount(unittest.TestCase):
