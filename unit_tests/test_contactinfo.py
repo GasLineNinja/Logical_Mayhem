@@ -1,7 +1,11 @@
 import unittest
-from project_apps.models import ContactEmail, ContactPhone
+from project_apps.models import Users
 
 class test_ContactInfo(unittest.TestCase):
+    def setUp(self):
+        self.TAUser = Users.objects.create(userName='Dan', password='YayTA', firstName='First', lastName='Last',
+                                           email='boettc74@uwm.edu', group='TA', userID=3)
+
     def test_validEmail(self):
         self.assertEquals(True, ContactEmail.set(self, "boettc74@uwm.edu"))
 
