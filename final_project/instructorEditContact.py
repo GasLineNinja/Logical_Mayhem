@@ -1,6 +1,10 @@
 from editContactInfo import EditContactInfoInterface
 
 class instructorEditContact(object, EditContactInfoInterface):
+    def __init__(self,editContact, conactInformation):
+        self.editContact = self.editContact
+        self.contactInformation = self.contactInformation
+
     def editInfo(editContact):
         #Precondition: Check if isInstrcutor ()
         #Precondition: check if editContact is true

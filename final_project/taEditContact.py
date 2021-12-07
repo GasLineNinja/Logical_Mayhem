@@ -1,6 +1,10 @@
 from editContactInfo import EditContactInfoInterface
 
 class TAEditContact(object, EditContactInfoInterface):
+    def __init__(self,editContact, conactInformation):
+        self.editContact = self.editContact
+        self.contactInformation = self.contactInformation
+
     def editInfo(editContact):
         #Precondition: Check if isTA()
         #Precondition: Check if editContact is true
