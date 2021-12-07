@@ -28,4 +28,4 @@ class test_ContactInfo(unittest.TestCase):
 
     def test_editTAPermissions(self):
         response = self.user2.post('/', {'First name:', 'Dan', 'Last name:', 'YayTA'})
-        self.assertEqual(response.url, '/editInfo/')
+        self.assertEqual(response.url, '/editInfo/' )
