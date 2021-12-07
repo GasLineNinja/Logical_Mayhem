@@ -157,3 +157,9 @@ class ViewUsers(View):
     # display add users page
     def get(self, request):
         return render(request, "", {})
+
+class Assignments(View):
+
+    # display add users page
+    def get(self, request):
+        return render(request, "", {})
