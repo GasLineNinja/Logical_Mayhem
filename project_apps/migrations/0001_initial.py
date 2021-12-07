@@ -44,4 +44,14 @@ class Migration(migrations.Migration):
                 ('group', models.CharField(max_length=25)),
             ],
         ),
+        migrations.CreateModel(
+            name='CourseAssign',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('courseName' , models.CharField(max_length=100)),
+                ('assignmentNum' , models.IntegerField()),
+                ( 'assignment' ,models.CharField(max_length=50)),
+                ( 'assignment1' , models.CharField(max_length=50)),
+            ],
+        ),
     ]

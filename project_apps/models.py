@@ -1,6 +1,6 @@
 from django.db import models
-
 # Create your models here.
+
 
 class Users(models.Model):
     userName = models.CharField(max_length=25)
@@ -11,7 +11,7 @@ class Users(models.Model):
     phoneNum = models.CharField(max_length=15, default=0)
     email = models.CharField(max_length=50)
     group = models.CharField(max_length=25)
-    userID = models.IntegerField(max_length=9)
+
 
 class Courses(models.Model):
     courseName = models.CharField(max_length=100)
@@ -27,3 +27,10 @@ class Labs(models.Model):
     labNum = models.IntegerField()
     labTime = models.CharField(max_length=50)
     taName = models.CharField(max_length=50)
+
+
+class CourseAssign(models.Model):
+    courseName = models.CharField(max_length=100)
+    assignmentNum = models.IntegerField()
+    assignment = models.CharField(max_length=50)
+    assignment1 = models.CharField(max_length=50)
