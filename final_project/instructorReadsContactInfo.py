@@ -1,6 +1,10 @@
 from readPublicContact import ReadPublicContactInterface
 
 class InstructorReadsContactInfo(object,ReadPublicContactInterface):
+    def __init__(self,viewinfo, information):
+        self.viewinfo = self.viewinfo
+        self.information = self.information
+
     def readPublicContactInfo(viewinfo, information):
         #Precondition: Check if isInstrcutor()
         #Precondition: check if viewInfo is true
