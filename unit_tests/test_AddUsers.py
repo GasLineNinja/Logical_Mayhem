@@ -7,7 +7,7 @@ from project_apps.models import Users
 
 class TestAddUsers(TestCase):
     def setUp(self):
-        self.existingUser = Users.objects.create(userName="ottmakai000", password="pass1")
+        self.existingUser = Users.objects.create(userName="ottmakai000", password1="pass1")
         self.AdminUser = Users.objects.create(group='Administrator')
         self.InstructUser = Users.objects.create(group='Instructor')
         self.TAUser = Users.objects.create(group='TA')
@@ -24,7 +24,7 @@ class TestAddUsers(TestCase):
             Users.objects.get(password='badpassword')
 
     def test_goodPassword(self):
-        self.assertEqual(self.existingUser, Users.objects.get(password='pass1'))
+        self.assertEqual(self.existingUser, Users.objects.get(password1='pass1'))
 
     def test_newUserAdmin(self):
         self.assertEqual(self.AdminUser, Users.objects.get(group='Administrator'))

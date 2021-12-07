@@ -1,7 +1,7 @@
 from editaccounts import EditAccountsInterface
 
 class EditInstructorAccount(EditAccountsInterface):
-    def editAccount(userID: int, group: str):
+    def editAccount(userID, group):
         #A user can only edit an instructor account if they are an admin (checked with isAdmin)
                 #and then that userID is edited
             # or the actual instructor is editing their own account (checked with userID)

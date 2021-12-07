@@ -3,14 +3,15 @@ from django.db import models
 # Create your models here.
 
 class Users(models.Model):
-    name = models.CharField(max_length=25)
     userName = models.CharField(max_length=25)
-    password = models.CharField(max_length=25)
+    password1 = models.CharField(max_length=25)
+    password2 = models.CharField(max_length=25)
     firstName = models.CharField(max_length=25)
     lastName = models.CharField(max_length=25)
+    phoneNum = models.CharField(max_length=15, default=0)
     email = models.CharField(max_length=50)
     group = models.CharField(max_length=25)
-    userID = models.intField(max_length=10)
+    userID = models.IntegerField(max_length=9)
 
 class Courses(models.Model):
     courseName = models.CharField(max_length=100)
