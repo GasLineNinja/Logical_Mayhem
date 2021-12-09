@@ -6,9 +6,8 @@ from django.test import Client
 from project_apps.models import Users, Courses, CourseAssign
 
 
-class test_init(TestCase):
-
-    #Unit Tests
+# Unit Tests
+class unit_tests(TestCase):
 
     def test_TAview(self):
         self.assertEquals(True,taViewAssign(self,True, "Assignments"))
@@ -38,7 +37,10 @@ class test_init(TestCase):
             taViewAssign(self, True, "Assignments", "Assignments")
 
 
-    #Acceptance Tests
+
+#Acceptance Tests
+class test_init(TestCase):
+
     def setUp(self):
         self.client = Client()
         self.course = Courses.objects.create(courseName='CompSci 361 Intro to Software Engineering')
