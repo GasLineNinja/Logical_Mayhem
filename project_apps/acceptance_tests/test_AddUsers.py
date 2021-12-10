@@ -11,7 +11,7 @@ class TestAddUsers(TestCase):
                          msg="TestAddUsers:test_existingUser Existing user not found in database")
 
     def test_badPassword(self):
-        with self.assertRaises(ValueError, msg="TestAddUsers:test_badPassword Password input does not match password in database"):
+        with self.assertRaises(AssertionError, msg="TestAddUsers:test_badPassword Password input does not match password in database"):
             Users.objects.get(password='badpassword')
 
     def test_goodPassword(self):
