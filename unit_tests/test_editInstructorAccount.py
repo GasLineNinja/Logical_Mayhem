@@ -1,4 +1,3 @@
-from final_project import editInstructorAccount
 import unittest
 from project_apps.models import Users
 from django.test import Client
