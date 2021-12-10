@@ -44,9 +44,9 @@ class TestCheckForExistingUser(TestCase):
 
     def setUp(self):
             self.existingUser = AddUsers.createUser("ottmakai000", "pass", "fname", "lname", "email", "User", 1234567890)
-            self.AdminUser = AddUsers.createUser("admin", "pass", "fname", "lname", "email", "Administrator", 1234567890)
-            self.AdminUser = AddUsers.createUser("instruct", "pass", "fname", "lname", "email", "Instructor", 1234567890)
-            self.AdminUser = AddUsers.createUser("ta", "pass", "fname", "lname", "email", "TA", 1234567890)
+
+"""
+    Move tests to isAdmin unit tests
 
     def test_findAdminTrue(self):
         self.assertTrue(isAdmin.adminPermission('Administrator'),
@@ -54,7 +54,7 @@ class TestCheckForExistingUser(TestCase):
 
     def test_findAdminFalse(self):
         self.assertFalse(isAdmin.adminPermission('TA'),
-             msg='TestCreateUser:test_findAdminFalse TA is seen as an Admin')
+             msg='TestCreateUser:test_findAdminFalse TA is seen as an Admin') """
 
     def test_uniqueUsername(self):
         self.assertFalse(AddUsers.checkForExistingUser('newUser'),
