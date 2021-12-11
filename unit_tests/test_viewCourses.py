@@ -14,6 +14,11 @@ class test_viewCourses(TestCase):
         self.course2 = Courses.objects.create(courseName='CompSci 361 Intro to Software Engineering')
         self.course3 = Courses.objects.create(courseName='INFOST 695 Ethical Hacking 1')
 
+    #Unit Tests
+
+
+
+    #Acceptance Tests
     def viewCoursesAdmin(self):
         response = self.user1.post('/', {'First name:', 'Space', 'Last name:', 'Ghost'})
         self.assertEquals(response.url, "/courseInfo/")
