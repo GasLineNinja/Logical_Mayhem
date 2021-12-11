@@ -2,11 +2,17 @@ import unittest
 #test for if preconditions aren't met, test if they are
 #test if conditions are given something they aren't expecting
 #look for holes
+from django.contrib.auth.models import User
+from django.test import Client
+
+from project_apps.models import createAccount
+
 
 class TestGetAccount(unittest.TestCase):
     def setUp(self):
-        pass
-
+        self.client = Client()
+        self.account1 = createAccount.objects.create( createNewAccount= "true", createUser = 'JasonRock', createPassword = '123',  generateUserid= '2468')
+        self.account2 = createAccount.objects.create( createNewAccount= "false", createUser = 'JasonRock', createPassword = '123',  generateUserid= '2468')
     def test_falseCreateNewAccount(self):
         pass
 
