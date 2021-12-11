@@ -150,7 +150,7 @@ class ViewCourses(View):
 
     # display add users page
     def get(self, request):
-        return render(request, "", {})
+        return render(request, "viewCourses.html", {})
 
 class ViewUsers(View):
 
@@ -162,4 +162,4 @@ class Assignments(View):
 
     # display add users page
     def get(self, request):
-        return render(request, "", {})
+        return render(request, "assignments.html", {})

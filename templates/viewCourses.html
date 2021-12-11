@@ -2,9 +2,120 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ViewCourses</title>
+    <title>CEAS Course Scheduler</title>
+    <div class="header">
+		<h1>CEAS Course Scheduler App</h1>
+	</div>
+	<style type="text/css">
+		body{
+			background: lightgrey;
+		}
+
+        h1{
+			text-align: center;
+		}
+		.header{
+			margin: auto;
+			width: 100%;
+			height: 50px;
+			display: block;
+			background-color: #ffff4d;
+			color: black;
+		}
+	 	.topnav-centered{
+			width: 100%;
+			height: 35px;
+			display: block;
+			background-color: #000000;
+  			float: center;
+  			text-align: center;
+			color: white;
+		}
+		a:link{
+			text-decoration: none;
+			color: white;
+		}
+		a:visited{
+			text-decoration: none;
+			color: white;
+		}
+		a:hover{
+			text-decoration: underline;
+			color: blue;
+		}
+		a:active{
+			text-decoration: none;
+			color: blue;
+		}
+		div a{
+			float: center;
+			text-align: center;
+  			padding: 14px 16px;
+  			font-size: 17px;
+		}
+		.formheader{
+			width: 800px;
+			background-color: rgb(0,0,0,.6);
+			margin: auto;
+			color: #FFFFFF;
+			padding: 10px 0px 10px 0px;
+			text-align: center;
+			border-radius: 15px 15px 0px 0px;
+		}
+		.mainform{
+			background-color: rgb: (0,0,0,0.5);
+			width: 800px;
+			margin: auto;
+			text-align: left;
+		}
+		form{
+			font-size: 20px;
+		}
+		label, input{
+			display: inline-block;
+		}
+		label{
+			width: 300px;
+		}
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        table.center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+	</style>
 </head>
 <body>
-
+{% csrf_token %}
+    <div class="topnav">
+        <div class="topnav-centered">
+            <a class="active" href={% url 'homepage' %}>Home</a>
+            <a href="{% url 'addcourses' %}">Add Courses</a>
+        </div>
+    </div>
+        {% csrf_token %}
+<table class = "center">
+  <tr>
+      <th>Course Name</th>
+      <th>Number</th>
+      <th>Days</th>
+      <th>Time</th>
+  </tr>
+  <tr>
+      <td>{{ coursename }}</td>
+      <td>Number1</td>
+      <td>Days1</td>
+      <td>Time1</td>
+  </tr>
+  <tr>
+      <td>Course2</td>
+      <td>Number2</td>
+      <td>Days2</td>
+      <td>Time2</td>
+  </tr>
+</table>
 </body>
 </html>
