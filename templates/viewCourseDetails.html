@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 	<meta charset="utf-8">
 	<title>CEAS Course Scheduler</title>
-  
     <div class="header">
 		<h1>CEAS Course Scheduler App</h1>
 	</div>
@@ -79,24 +77,28 @@
 		label{
 			width: 300px;
 		}
+
 	</style>
 </head>
 <body>
     <div class="topnav">
     <div class="topnav-centered">
-        <a class="active" href={% url 'homepage' %}>Home</a>
+		<a class="active" href={% url 'homepage' %}>Home</a>
+        <a class="active" href={% url 'viewcourses' %}>View Courses</a>
 	</div>
     </div>
 	<div class="mainform">
-		<form action={% url 'viewcourses' %} method="post">
             {% csrf_token %}
 			<fieldset>
-				<p><label class="courselist">Course List:</p>
-                {{ message }}
-                {% for x in obj %}
-				<a href ="{% url 'viewCourseDetails' x.id %}"> {{x.courseName}}</a><hr>
-				{% endfor %}
-            </fieldset>
+                <div class="container">
+                Course Number: {{obj.courseNum}}
+                <br><br>Course Name: {{obj.courseName}}
+                <br><br>Course day(s): {{obj.courseDay}}
+                    <br><br>Course time: {{obj.courseTime}}
+                    <!--<h1>Instructor: {{obj.instructorName}}</h1>-->
+                    <!--<h1>TA: {{obj.taName}}</h1>-->
+                </div>
+			</fieldset>
 		</form>
 	</div>
 	</body>
