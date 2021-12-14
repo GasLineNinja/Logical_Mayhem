@@ -150,6 +150,7 @@ class ViewCourses(View):
 
     # display add users page
     def get(self, request):
+
         if(Courses.objects.count() == 0):
             return render(request, "viewCourses.html", {"message": "No courses have been added yet."})
         else:
@@ -171,8 +172,10 @@ class Assignments(View):
 
     # display add users page
     def get(self, request):
-        return render(request, "", {})
+
+        return render(request, "assignments.html", {})
 
 def detail_page(request, id):
     obj = get_object_or_404(Courses, pk=id)
     return render(request, 'viewCourseDetails.html', {'obj': obj})
+
