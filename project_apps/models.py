@@ -37,7 +37,10 @@ class CourseAssign(models.Model):
 
 
 class createAccount(models.Model):
-    createNewAccount = models.CharField(max_length=100)
+    isAdmin = models.BooleanField()
+    isIns = models.BooleanField()
+    isTA = models.BooleanField()
+    createNewAccount = models.BooleanField()
     createUser = models.IntegerField()
     createPassword = models.CharField(max_length=50)
     generateID = models.CharField(max_length=50)

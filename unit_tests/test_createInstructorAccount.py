@@ -11,50 +11,67 @@ from project_apps.models import createAccount
 class TestGetAccount(unittest.TestCase):
     def setUp(self):
         self.client = Client()
-        self.account1 = createAccount.objects.create( createNewAccount= "true", createUser = 'JasonRock', createPassword = '123',  generateUserid= '2468')
-        self.account2 = createAccount.objects.create( createNewAccount= "false", createUser = 'JasonRock', createPassword = '123',  generateUserid= '2468')
+        self.account1 = createAccount.objects.create( isAdmin = True,isIns = True, isTA = False, createNewAccount= True, createUser = 'JasonRock', createPassword = '123',  generateUserid= '2468')
+        self.account2 = createAccount.objects.create( isAdmin = True,isIns = True, isTA = False, createNewAccount= False, createUser = 'JRock', createPassword = 'admin',  generateUserid= '8468')
+        self.account3 = createAccount.objects.create(isAdmin=False, isIns = True, isTA = False,createNewAccount= False , createUser='JasonRock',
+                                                    createPassword='123', generateUserid='2468')
     def test_falseCreateNewAccount(self):
-        pass
+        self.assertEqual(self.account2.createNewAccount.__bool__(False),  msg= "Acount two cannot be created")
 
     def test_trueCreateNewAccount(self):
-        pass
+        self.assertEqual(self.account1.createNewAccount.__bool__(True), msg="Acount one can be created")
 
     def test_adminRequest(self):
-        pass
+        self.assertTrue (self.account1.isAdmin.__bool__(True), msg="admin request passed")
 
     def test_notAdminRequest(self):
-        pass
+        self.assertFalse(self.account2.isAdmin.__bool__(False), msg="admin request failed")
 
     def test_accountCreated(self):
-        pass
+        self.assertTrue(self.account1.isAdmin.__bool__(True), msg="admin request passed")
+        self.assertTrue(self.account1.createNewAccount.__bool__(True), msg="Acount one can be created")
 
     def test_accountNotCreated(self):
-        pass
-
+        self.assertFalse(self.account2.isAdmin.__bool__(False), msg="admin request failed")
+        self.assertEqual(self.account2.createNewAccount.__bool__(False),  msg= "Acount two cannot be created")
 class TestCreateAccount(unittest.TestCase):
     def setUp(self):
-        pass
+        self.client = Client()
+        self.account1 = createAccount.objects.create(isAdmin=True, isIns = True, isTA = False,createNewAccount=True, createUser='JasonRock',
+                                                     createPassword='123', generateUserid='2468')
+        self.account2 = createAccount.objects.create(isAdmin=True,isIns = True, isTA = False, createNewAccount=True, createUser=' ',
+                                                     createPassword='admin', generateUserid='8468')
+        self.account3 = createAccount.objects.create(isAdmin=False, isIns =  True, isTA = False,createNewAccount=True, createUser='JasonR',
+                                                     createPassword=' ', generateUserid='1234')
+        self.account4 = createAccount.objects.create(isAdmin=True, isIns = False, isTA = True, createNewAccount=False, createUser='JasonRock',
+                                                     createPassword='123', generateUserid='2468')
+        self.account3 = createAccount.objects.create(isAdmin=True, isIns=False, isTA=True, createNewAccount=False,
+                                                     createUser='JasonRock',
+                                                     createPassword='123', generateUserid='2468')
 
     def test_getAccountNotTrue(self):
-        pass
+        self.assertEqual(self.account2.createNewAccount.__bool__(False), msg="Acount two cannot be created")
+        self.assertFalse(self.account3.isAdmin.__bool__(False), self.account3.createNewAccount.__bool__(False), msg = "Account not true")
 
     def test_getAccountTrue(self):
-        pass
+        self.assertTrue(self.account1.isAdmin.__bool__(True), msg="admin request passed")
+        self.assertTrue(self.account1.createNewAccount.__bool__(True), msg="Acount one can be created")
+        self.assertEqual(self.account1.createUser.__eq__("JasonRock"), self.account1.createPassword.__eq__("123"), self.account1.generateUserid.__eq__("2468"))
 
     def test_createNewAccountTATrue(self):
-        pass
+        self.assertRaises(AssertionError, self.account4.isTa.__bool__(True), msg = "TA account and instructor account cannot b e created at the same time ")
 
     def test_createNewAccountInstructorTrue(self):
-        pass
+        self.assertEqual(self.account1.isIns.__bool__(True), msg = "created ins account")
 
-    def test_createNewAccountTAcreateNewAccountInstructorFalse(self):
-        pass
-
-    def test_createNewAccountTAcreateNewAccountInstructorTrue(self):
-        pass
+    # def test_createNewAccountTAcreateNewAccountInstructorFalse(self):
+    #
+    #
+    # def test_createNewAccountTAcreateNewAccountInstructorTrue(self):
+    #     pass
 
     def test_newInstructorcreated(self):
-        pass
+
 
     def test_newInstructorNotCreated(self):
         pass
