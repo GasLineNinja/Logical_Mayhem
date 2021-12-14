@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>CEAS Course Scheduler</title>
+	<meta charset="utf-8">
+	<title>CEAS Course Scheduler</title>
     <div class="header">
 		<h1>CEAS Course Scheduler App</h1>
 	</div>
@@ -82,26 +82,24 @@
 </head>
 <body>
     <div class="topnav">
-	<div class="topnav-centered">
+    <div class="topnav-centered">
 		<a class="active" href={% url 'homepage' %}>Home</a>
-		<a href={% url 'addusers' %}>Add Users</a>
+        <a class="active" href={% url 'viewcourses' %}>View Courses</a>
 	</div>
     </div>
-	<div class="formheader"><h3>Please fill out course information</h3></div>
 	<div class="mainform">
-		<form action={% url 'addcourses' %} method="post">
             {% csrf_token %}
 			<fieldset>
-                <p><label class="coursenum">Course number:   </label><input type="text" name="coursenum" min="100"
-                                                                            max="999" size="3"></p>
-				<p><label class="coursename">Course name:   </label><input type="text" name="coursename" size="50"></p>
-				<p><label class="courseday">Course days (U,M,T,W,H,F,S):   </label><input type="text" name="courseday"
-                                                                                          size ="11"></p>
-                <p><label class="coursetime">Course time:   </label><input type="time" name="coursetime" size ="50"></p>
+                <div class="container">
+                Course Number: {{obj.courseNum}}
+                <br><br>Course Name: {{obj.courseName}}
+                <br><br>Course day(s): {{obj.courseDay}}
+                    <br><br>Course time: {{obj.courseTime}}
+                    <!--<h1>Instructor: {{obj.instructorName}}</h1>-->
+                    <!--<h1>TA: {{obj.taName}}</h1>-->
+                </div>
 			</fieldset>
-				<input type="submit" name="submit" value="Submit">
 		</form>
-        {{ message }}
 	</div>
 	</body>
-</html>
+	</html>
