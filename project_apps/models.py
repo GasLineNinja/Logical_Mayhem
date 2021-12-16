@@ -8,7 +8,10 @@ class Users(models.Model):
     password2 = models.CharField(max_length=25)
     firstName = models.CharField(max_length=25)
     lastName = models.CharField(max_length=25)
-    phoneNum = models.CharField(max_length=15, default=0)
+    publicPhoneNum = models.CharField(max_length=15, default=0)
+    privatePhoneNum = models.CharField(max_length=15, default=0)
+    publicAddress= models.CharField(max_length=25)
+    privateAddres= models.CharField(max_length=25)
     email = models.CharField(max_length=50)
     group = models.CharField(max_length=25)
 

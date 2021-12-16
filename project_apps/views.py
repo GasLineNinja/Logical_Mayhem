@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from .classes import Instructor
 from django.views import View
 from .models import Users, Courses, Labs
 

@@ -6,6 +6,13 @@ from project_apps.models import Users
 #look for holes
 
 class TestAddUsers(TestCase):
+    def setUp(self):
+        #fix using Users.objects.create
+        self.existingUser = Users.objects.create(userName="ottmakai000", password1="pass", firstName="fname", lastName="lname", email="email", group="User", privatePhoneNum=1234567890, privateAddress="E Knapp St")
+        self.AdminUser = Users.objects.create(userName="IAmAnAdmin", password1="pass", firstName="fname", lastName="lname", email="email", group="Administrator", privatePhoneNum=1234567890, privateAddress="E Knapp St")
+        self.InstructUser = Users.objects.create(userName="IAmAnInstructor", password1="pass", firstName="fname", lastName="lname", email="email", group="Instructor", privatePhoneNum=1234567890, privateAddress="E Knapp St")
+        self.TAUser = Users.objects.create(userName="IAmATA", password1="pass", firstName="fname", lastName="lname", email="email", group="TA", privatePhoneNum=1234567890, privateAddress="E Knapp St")
+
     def test_existingUser(self):
         self.assertEqual(self.existingUser, Users.objects.get(username='ottmakai000'),
                          msg="TestAddUsers:test_existingUser Existing user not found in database")
