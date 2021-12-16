@@ -157,6 +157,11 @@ class ViewCourses(View):
             obj = Courses.objects.all()
             return render(request, 'viewCourses.html', {'obj': obj})
 
+class EditCourses(View):
+
+   def get(self,request):
+      return render(request,"editCourses.html",{})
+
 #class ViewCoursesDetails(View):
 #    def get(self, request, id):
 #        obj = get_object_or_404(Courses, pk=id)
@@ -166,7 +171,11 @@ class ViewUsers(View):
 
     # display add users page
     def get(self, request):
-        return render(request, "", {})
+        if (Users.objects.count() == 0):
+            return render(request, "viewUsers.html", {"message": "No users have been added yet."})
+        else:
+            obj = Users.objects.all()
+            return render(request, 'viewUsers.html', {'obj': obj})
 
 class Assignments(View):
 
