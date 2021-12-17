@@ -2,7 +2,8 @@ from django.test import TestCase
 from project_apps.models import Users
 from final_project.AddUsers import AddUsers
 from final_project.isAdmin import isAdmin
-
+#check if user creates exists, check for existing, and then create user, goes of of preconditions (create user is called) should add a unittests for if there is no username within those parameters
+#see if username under username exists,
 #test for if preconditions aren't met, test if they are
 #test if conditions are given something they aren't expecting
 #look for holes
