@@ -2,13 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from .models import Users, Courses, Labs
 
+
 # Create your views here.
 
 class SignUp(View):
 
     # display sing up form
     def get(self, request):
-        return render(request, "signup.html",{})
+        return render(request, "signup.html", {})
 
     # get user input form form
     def post(self, request):
@@ -50,6 +51,7 @@ class SignUp(View):
             request.session["username"] = m.userName
             return render(request, "login.html", {"message": "You have an account. Please log in."})
 
+
 class Login(View):
 
     # display login form
@@ -83,17 +85,20 @@ class Login(View):
             request.session["username"] = m.userName
             return redirect('homepage')
 
+
 class Homepage(View):
 
     # display homepage
     def get(self, request):
         return render(request, "homepage.html", {})
 
+
 class UserHomepage(View):
 
     # display homepage
     def get(self, request):
         return render(request, "userHomepage.html", {})
+
 
 class AddCourses(View):
 
@@ -119,6 +124,7 @@ class AddCourses(View):
             return redirect('addcourses')
         else:
             return render(request, "addCourses.html", {"message": "Course already exists."})
+
 
 class AddUsers(View):
 
@@ -146,17 +152,20 @@ class AddUsers(View):
         else:
             return render(request, "addUsers.html", {"message": "User already exists"})
 
+
 class ViewCourses(View):
 
     # display add users page
     def get(self, request):
-        if(Courses.objects.count() == 0):
+
+        if (Courses.objects.count() == 0):
             return render(request, "viewCourses.html", {"message": "No courses have been added yet."})
         else:
             obj = Courses.objects.all()
             return render(request, 'viewCourses.html', {'obj': obj})
 
-#class ViewCoursesDetails(View):
+
+# class ViewCoursesDetails(View):
 #    def get(self, request, id):
 #        obj = get_object_or_404(Courses, pk=id)
 #        return render(request, 'viewCoursesDetails.html', {'obj': obj})
@@ -167,11 +176,13 @@ class ViewUsers(View):
     def get(self, request):
         return render(request, "", {})
 
+
 class Assignments(View):
 
     # display add users page
     def get(self, request):
-        return render(request, "", {})
+        return render(request, "assignments.html", {})
+
 
 def detail_page(request, id):
     obj = get_object_or_404(Courses, pk=id)
