@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from .models import Users, Courses, Labs
 
@@ -13,7 +13,7 @@ class SignUp(View):
     # get user input form form
     def post(self, request):
 
-        # vaiables for no existing user and bad password
+        # variables for no existing user and bad password
         noUser = False
         badPassword = False
 
@@ -150,7 +150,17 @@ class ViewCourses(View):
 
     # display add users page
     def get(self, request):
-        return render(request, "", {})
+
+        if(Courses.objects.count() == 0):
+            return render(request, "viewCourses.html", {"message": "No courses have been added yet."})
+        else:
+            obj = Courses.objects.all()
+            return render(request, 'viewCourses.html', {'obj': obj})
+
+#class ViewCoursesDetails(View):
+#    def get(self, request, id):
+#        obj = get_object_or_404(Courses, pk=id)
+#        return render(request, 'viewCoursesDetails.html', {'obj': obj})
 
 class ViewUsers(View):
 
@@ -162,4 +172,10 @@ class Assignments(View):
 
     # display add users page
     def get(self, request):
-        return render(request, "", {})
+
+        return render(request, "assignments.html", {})
+
+def detail_page(request, id):
+    obj = get_object_or_404(Courses, pk=id)
+    return render(request, 'viewCourseDetails.html', {'obj': obj})
+
