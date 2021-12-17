@@ -1,7 +1,7 @@
 from django.test import TestCase
 from project_apps.models import Users
-from final_project.AddUsers import AddUsers
-from final_project.isAdmin import isAdmin
+from classes.AddUsers import AddUsers
+from classes.isAdmin import isAdmin
 
 #test for if preconditions aren't met, test if they are
 #test if conditions are given something they aren't expecting

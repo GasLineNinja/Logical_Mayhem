@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from classes.Administrator import Administrator
+from classes.Instructor import Instructor
+from classes.ta import TA
 from .models import Users, Courses, Labs
+
 
 # Create your views here.
 
@@ -8,7 +12,7 @@ class SignUp(View):
 
     # display sing up form
     def get(self, request):
-        return render(request, "signup.html",{})
+        return render(request, "signup.html", {})
 
     # get user input form form
     def post(self, request):
@@ -59,7 +63,7 @@ class Login(View):
     # get user input form form
     def post(self, request):
 
-        # vaiables for no existing user and bad password
+        # variables for no existing user and bad password
         noUser = False
         badPassword = False
 
@@ -72,7 +76,8 @@ class Login(View):
 
         # if new user
         if noUser:
-            return render(request, "signup.html", {"message": "Username not found. Please create an account."})
+            return render(request, "login.html", {"message": "Username not found. Please have the Administrator"
+                                                             " create your account."})
         elif badPassword:
             return render(request, "login.html", {"message": "bad password"})
         # if user exists redirect to homepage
@@ -83,17 +88,20 @@ class Login(View):
             request.session["username"] = m.userName
             return redirect('homepage')
 
+
 class Homepage(View):
 
     # display homepage
     def get(self, request):
         return render(request, "homepage.html", {})
 
+
 class UserHomepage(View):
 
     # display homepage
     def get(self, request):
         return render(request, "userHomepage.html", {})
+
 
 class AddCourses(View):
 
@@ -102,7 +110,6 @@ class AddCourses(View):
         return render(request, "addCourses.html", {})
 
     def post(self, request):
-
         noCourse = False
 
         # checking if course already exists
@@ -120,6 +127,7 @@ class AddCourses(View):
         else:
             return render(request, "addCourses.html", {"message": "Course already exists."})
 
+
 class AddUsers(View):
 
     # display add users page
@@ -127,7 +135,11 @@ class AddUsers(View):
         return render(request, "addUsers.html", {})
 
     def post(self, request):
-
+        administrator = Administrator(group=request.session['Administrator'])
+        respose = administrator.create_users(username=request.POST['username'], firstName=request.POST['fname'],
+                                             lastName=request.POST['lname'], email=request.POST['email'],
+                                             password1=request.POST['pass1'], group=request.POST['group'])
+        # if response
         noUser = False
 
         try:
@@ -147,16 +159,17 @@ class AddUsers(View):
             return render(request, "addUsers.html", {"message": "User already exists"})
 
 class ViewCourses(View):
-
     # display add users page
     def get(self, request):
         return render(request, "", {})
+
 
 class ViewUsers(View):
 
     # display add users page
     def get(self, request):
         return render(request, "", {})
+
 
 class Assignments(View):
 
