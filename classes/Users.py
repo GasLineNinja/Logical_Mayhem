@@ -21,3 +21,21 @@ class User(ABC):
 
     def set_email(self, email):
         pass
+
+    def view_users(self, group1, group2, group3):
+        pass
+
+    def assign_courses(self, coursenumber, labnumber, firstname, lastname):
+        pass
+
+    def view_course_assignments(self, username, coursename, labnumber):
+        pass
+
+    def check_for_existing_user(self, username, firstname, lastname):
+        pass
+
+    def check_for_existing_course(self, coursenumber):
+        pass
+
+    def check_for_existing_lab(self, coursename, labnumber):
+        pass

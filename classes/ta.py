@@ -1,8 +1,10 @@
 from project_apps.models import Users, Courses, Labs
 from Users import User
+from classes.Users import User
+from abc import ABC, abstractmethod
 
 
-class TA(User):
+class TA(User, ABC):
 
     def __init__(self, userName, password1, firstName, lastName, phoneNum, email, group="TA"):
         self.username = userName
@@ -13,26 +15,16 @@ class TA(User):
         self.email = email
         self.group = group
 
-    def set_username(self, username):
-        self.username = username
+    @abstractmethod
+    def view_course_assignments(self, username, coursenumber, labnumber):
+        list_labs = list(Labs.objects.filter(courseNum=coursenumber, labNum=labnumber,
+                                             userName=username))
+        return list_labs
 
-    def set_password(self, password1):
-        self.password = password1
+    @abstractmethod
+    def view_users(self, groupAdmin, groupInstruct, groupTA):
+        list_admin = list(Users.objects.filter(group=groupAdmin))
+        list_instructors = list(Users.objects.filter(group=groupInstruct))
+        list_ta = list(Users.objects.filter(group=groupTA))
 
-    def set_first_name(self, firstname):
-        self.firstname = firstname
-
-    def set_last_name(self, lastname):
-        self.lastname = lastname
-
-    def set_phone_num(self, phonenum):
-        self.phonenum = phonenum
-
-    def set_email(self, email):
-        self.email = email
-
-    def view_course_assignments(self):
-        pass
-
-    def view_users(self):
-        pass
+        return list_admin + list_instructors + list_ta

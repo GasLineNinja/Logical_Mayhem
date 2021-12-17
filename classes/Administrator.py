@@ -5,34 +5,15 @@ from abc import ABC, abstractmethod
 
 class Administrator(User, ABC):
 
-    def __init__(self, userName, password1, firstName, lastName, phoneNum, email, group="Administrator"):
+    def __init__(self, userName, password1, firstName, lastName, email, group="Administrator"):
         self.username = userName
         self.password = password1
         self.firstname = firstName
         self.lastname = lastName
-        self.phonenum = phoneNum
         self.email = email
         self.group = group
 
-    def set_username(self, username):
-        self.username = username
-
-    def set_password(self, password):
-        self.password = password
-
-    def set_first_name(self, firstname):
-        self.firstname = firstname
-
-    def set_last_name(self, lastname):
-        self.lastname = lastname
-
-    def set_phone_num(self, phonenum):
-        self.phonenum = phonenum
-
-    def set_email(self, email):
-        self.email = email
-
-    def check_for_existing_user(self, username):
+    def check_for_existing_user(self, username, firstname, lastname):
         # getting list of users in the database with passed username
         list_users = list(Users.objects.filter(userName=username))
         # if len of list for username is less than one user does not exist
@@ -58,7 +39,7 @@ class Administrator(User, ABC):
 
     def create_users(self, username, firstname, lastname, email, password, group):
         # calling method to check for existing user
-        if self.check_for_existing_user(username=username):
+        if self.check_for_existing_user(username):
             message = 'User already exists'
             return message
         user_ref = Users.objects.create(userName=username, group=group, firstName=firstname,
@@ -85,7 +66,8 @@ class Administrator(User, ABC):
         message = f'Lab number {lab_ref.labNum} for course {lab_ref.courseName} has been created'
         return message
 
-    def assign_courses(self, coursenumber, firstname, lastname):
+    @abstractmethod
+    def assign_courses(self, coursenumber, labnumber, firstname, lastname):
         # calling to check for existing course
         if self.check_for_existing_course(coursenumber):
             course_ref = Courses.objects.update(courseNum=coursenumber, instructorFirstName=firstname,
@@ -97,5 +79,11 @@ class Administrator(User, ABC):
             message = 'Cannot add user to course. Course does not exist'
             return message
 
-    def view_users(self, group):
-        pass
+    @abstractmethod
+    def view_users(self, groupAdmin, groupInstruct, groupTA):
+        list_instructors = list(Users.objects.filter(group=groupInstruct))
+        list_ta = list(Users.objects.filter(group=groupTA))
+
+        return list_instructors + list_ta
+
+
