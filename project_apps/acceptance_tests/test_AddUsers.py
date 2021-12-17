@@ -1,9 +1,10 @@
 from django.test import TestCase
 from project_apps.models import Users
 
-#test for if preconditions aren't met, test if they are
-#test if conditions are given something they aren't expecting
-#look for holes
+
+# test for if preconditions aren't met, test if they are
+# test if conditions are given something they aren't expecting
+# look for holes
 
 class TestAddUsers(TestCase):
     def test_existingUser(self):
@@ -11,7 +12,8 @@ class TestAddUsers(TestCase):
                          msg="TestAddUsers:test_existingUser Existing user not found in database")
 
     def test_badPassword(self):
-        with self.assertRaises(AssertionError, msg="TestAddUsers:test_badPassword Password input does not match password in database"):
+        with self.assertRaises(AssertionError,
+                               msg="TestAddUsers:test_badPassword Password input does not match password in database"):
             Users.objects.get(password='badpassword')
 
     def test_goodPassword(self):
