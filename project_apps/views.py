@@ -61,7 +61,7 @@ class Login(View):
     # get user input form form
     def post(self, request):
 
-        # vaiables for no existing user and bad password
+        # variables for no existing user and bad password
         noUser = False
         badPassword = False
 
