@@ -23,8 +23,8 @@ class PasswordUnsuccessful(TestCase):
         self.assertEqual(response.url, 'signup.html', msg='Passwords do not match')
 
     def test_sign_up_bad_password(self):
-        response = self.client.post('signup.html', {'userName': 'george', 'password1': './s[-3or]',
-                                                    'password2': './s[-3or]', 'group': 'Administrator'})
+        response = self.client.post('signup.html', {'userName': 'george', 'password1': '@./s[-3or]',
+                                                    'password2': '@./s[-3or]', 'group': 'Administrator'})
         self.assertEqual(response.url, 'signup.html', response.context['message'], 'bad password',
                          msg='Error: User must add a password to create an account')
 
