@@ -1,10 +1,10 @@
-import unittest
+from django.test import TestCase
+from project_apps.models import Users
 
 
-class MyTestCase(unittest.TestCase):
+class MyTestCase(TestCase):
     def test_something(self):
         self.assertEqual(True, False)  # add assertion here
 
 
-if __name__ == '__main__':
-    unittest.main()
+
