@@ -143,7 +143,7 @@ class ViewCourses(View):
 class ViewUsers(View):
     # display add users page
     def get(self, request):
-        userobj = Courses.objects.all()
+        userobj = Users.objects.all()
         return render(request, 'viewUsers.html', {'userobj': userobj})
 
 def user_detail_page(request, id):
