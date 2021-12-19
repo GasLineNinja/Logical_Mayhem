@@ -6,7 +6,7 @@ from project_apps.models import Users, Courses, Labs
 class test_viewData(TestCase):
     def setup(self):
         self.client = Client()
-        self.user1 = Users.objects.create(userName='mdstrand', password='12345', firstName='Michael',
+        self.user1 = Users.objects.create(userName='mdstrand', password1='12345', firstName='Michael',
                                           lastName='Strand', email='mdstrand@uwm.edu', group='Administrator')
         self.course1 = Courses.objects.create(courseName='CompSci 361 Intro to Software Engineering',
                                               courseTime='MW 10:00a')
