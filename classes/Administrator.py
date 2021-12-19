@@ -1,5 +1,5 @@
 from project_apps.models import Users, Courses, Labs
-from classes.Users import User
+from classes.User import User
 from abc import ABC, abstractmethod
 
 
@@ -13,7 +13,7 @@ class Administrator(User, ABC):
         self.email = email
         self.group = group
 
-    def check_for_existing_user(self, username, firstname, lastname):
+    def check_for_existing_user(self, username):
         # getting list of users in the database with passed username
         list_users = list(Users.objects.filter(userName=username))
         # if len of list for username is less than one user does not exist
@@ -39,7 +39,7 @@ class Administrator(User, ABC):
 
     def create_users(self, username, firstname, lastname, email, password, group):
         # calling method to check for existing user
-        if self.check_for_existing_user(username):
+        if Administrator.check_for_existing_user(self, username):
             message = 'User already exists'
             return message
         user_ref = Users.objects.create(userName=username, group=group, firstName=firstname,

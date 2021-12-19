@@ -1,5 +1,5 @@
 from project_apps.models import Users, Courses, Labs
-from classes.Users import User
+from classes.User import User
 from abc import ABC, abstractmethod
 
 
