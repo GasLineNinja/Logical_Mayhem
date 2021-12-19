@@ -22,6 +22,7 @@ class Courses(models.Model):
     instructorLastName = models.CharField(max_length=50)
     taFirstName = models.CharField(max_length=50)
     taLastName = models.CharField(max_length=50)
+    viewC = models.BooleanField(default = True)
 
 
 class Labs(models.Model):
