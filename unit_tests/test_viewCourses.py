@@ -1,10 +1,9 @@
-from django.shortcuts import render, get_object_or_404
 from django.test import TestCase
 from django.test import Client
 
-from project_apps.models import Users, Courses, Labs
-from final_project import viewCourses, viewAllCourses, viewOneCourse
-from django.utils import timezone
+from project_apps.models import Users, Courses
+from classes import viewAllCourses, viewOneCourse
+
 
 class test_viewCourses(TestCase):
 
@@ -24,55 +23,55 @@ class test_viewCourses(TestCase):
 
     #Unit Tests
     def test_allCourses(self):
-        self.assertEquals(True,viewAllCourses.view(self, True))
+        self.assertEquals(True, viewAllCourses.view(self, True))
 
-    def test_allCourses(self):
+    def test_allCourses2(self):
         self.assertEquals(False, viewAllCourses.view(self, False))
 
-    def test_allCoursesWrongParameters(self):
+    def test_allCoursesWrongParameters1(self):
         with self.assertRaises(BaseException,msg="Does not return error on incorrect parameters"):
             viewAllCourses.view(self)
 
-    def test_allCoursesWrongParameters(self):
+    def test_allCoursesWrongParameters2(self):
         with self.assertRaises(BaseException,msg="Does not return error on incorrect parameters"):
             viewAllCourses.view(self, "Hello")
 
-    def test_allCoursesWrongParameters(self):
+    def test_allCoursesWrongParameters3(self):
         with self.assertRaises(BaseException,msg="Does not return error on incorrect parameters"):
-            viewAllCourses.view(self,123345)
+            viewAllCourses.view(self, 123345)
 
-    def test_allCoursesWrongParameters(self):
+    def test_allCoursesWrongParameters4(self):
         with self.assertRaises(BaseException,msg="Does not return error on incorrect parameters"):
-            viewAllCourses.view(self,True,True)
+            viewAllCourses.view(self, True, True)
 
     def test_oneCourse(self):
-        self.assertEquals(True,viewOneCourse.view(self,True,"Compsci 361"))
+        self.assertEquals(True, viewOneCourse.view(self, True, "Compsci 361"))
 
     def test_oneCourseFake(self):
-        self.assertEquals(True,viewOneCourse.view(self,True,"Jumping 101"))
+        self.assertEquals(True, viewOneCourse.view(self, True, "Jumping 101"))
 
     def test_oneCourseFalse(self):
-        self.assertEquals(True,viewOneCourse.view(self,False,"Compsci 361"))
+        self.assertEquals(True, viewOneCourse.view(self, False, "Compsci 361"))
 
-    def test_allCoursesWrongParameters(self):
+    def test_allCoursesWrongParameters5(self):
         with self.assertRaises(BaseException,msg="Does not return error on incorrect parameters"):
-            viewOneCourse.view(self,True)
+            viewOneCourse.view(self, True)
 
-    def test_allCoursesWrongParameters(self):
+    def test_allCoursesWrongParameters6(self):
         with self.assertRaises(BaseException,msg="Does not return error on incorrect parameters"):
-            viewOneCourse.view(self,True,1234123)
+            viewOneCourse.view(self, True, 1234123)
 
-    def test_allCoursesWrongParameters(self):
+    def test_allCoursesWrongParameters7(self):
         with self.assertRaises(BaseException,msg="Does not return error on incorrect parameters"):
-            viewOneCourse.view(self,True,False)
+            viewOneCourse.view(self, True, False)
 
-    def test_allCoursesWrongParameters(self):
+    def test_allCoursesWrongParameters8(self):
         with self.assertRaises(BaseException,msg="Does not return error on incorrect parameters"):
             viewOneCourse.view(self)
 
-    def test_allCoursesWrongParameters(self):
+    def test_allCoursesWrongParameters9(self):
         with self.assertRaises(BaseException,msg="Does not return error on incorrect parameters"):
-            viewOneCourse.view(self,True,"Compsci","Physics")
+            viewOneCourse.view(self, True, "Compsci", "Physics")
 
 
     #Acceptance Tests
