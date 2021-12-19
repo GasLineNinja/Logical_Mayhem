@@ -1,8 +1,8 @@
 import unittest
 from django.test import TestCase
 from project_apps.models import Users
-from classes.Administrator import Administrator
 from classes.isAdmin import isAdmin
+from classes.Administrator import Administrator
 
 #test for if preconditions aren't met, test if they are
 #test if conditions are given something they aren't expecting
