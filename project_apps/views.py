@@ -52,7 +52,7 @@ class Login(View):
         # check for existing user
         if Administrator.check_for_existing_user(self, username=request.POST['username']):
             u = Users.objects.get(userName=request.POST['username'])
-            badPass = (u.password1 != request.POST['pass1'])
+            badPass = (u.password != request.POST['pass1'])
 
             #if user exists and wrong password given
             if badPass:
@@ -71,11 +71,11 @@ class Login(View):
                                                              " create your account."})
 
 
-class Homepage(View):
+class AdminHomepage(View):
 
     # display homepage
     def get(self, request):
-        return render(request, "homepage.html", {})
+        return render(request, "adminHomepage.html", {})
 
 
 class UserHomepage(View):
@@ -139,3 +139,27 @@ class Assignments(View):
     # display add users page
     def get(self, request):
         return render(request, "", {})
+
+
+class EditInfo(View):
+    # display edit info page
+    def get(self, request):
+        return render(request, "editInfo.html", {})
+
+    def post(self, request):
+        p1 = request.POST['pass1']
+        p2 = request.POST['pass2']
+        u = Users.objects.get(userName=request.session['username'])
+
+        if p1 != p2:
+            return render(request, "editInfo.html", {"message": "Passwords do not match"})
+        elif not p1:
+            Instructor.edit_info(self, username=request.session['username'], email=request.POST['email'],
+                                 phonenumber=request.POST['phonenum'], password=u.password)
+            return render(request, "editInfo.html", {"message": "Your information has been updated"})
+        else:
+            Instructor.edit_info(self, username=request.session['username'], email=request.POST['email'],
+                                 phonenumber=request.POST['phonenum'], password=request.POST['pass1'])
+            return render(request, "editInfo.html", {"message": "Your information and password hve been updated"})
+
+

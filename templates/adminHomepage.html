@@ -85,6 +85,7 @@
     <div class="topnav">
         <div class="topnav-centered">
             <a class="active" href={% url 'homepage' %}>Home</a>
+            <a href={% url 'editinfo' %}>Edit Info</a>
             <a href="{% url 'addcourses' %}">Add Courses</a>
             <a href="{% url 'addusers' %}">Add Users</a>
             <a href="">View Courses</a>
@@ -92,7 +93,7 @@
         </div>
     </div>
     <div class="formheader"><h3>Welcome to the Admin Homepage!</h3>
-        <p>Please choose Add Courses or Add users to continue</p>
+        <p>Please choose an option to continue</p>
     </div>
         {% csrf_token %}
 </body>

@@ -92,8 +92,8 @@
 		<form action={% url 'login' %} method="post">
             {% csrf_token %}
 			<fieldset>
-				<p><label>Username: <input type="text" name="username" value=""></label></p>
-				<p><label>Password: <input type="password" name="pass1" value=""></label></p>
+				<p><label>Username: <input type="text" name="username" required></label></p>
+				<p><label>Password: <input type="password" name="pass1" required></label></p>
 			</fieldset>
 				<input type="submit" name="submit" value="Submit">
 		</form>
