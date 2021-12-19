@@ -6,7 +6,6 @@ from .models import Users, Courses, Labs
 # Create your views here.
 
 class SignUp(View):
-
     # display sing up form
     def get(self, request):
         return render(request, "signup.html", {})
