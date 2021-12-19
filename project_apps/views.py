@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
+from classes.Administrator import Administrator
+from classes.Instructor import Instructor
+from classes.ta import TA
 from .models import Users, Courses, Labs
 
 
@@ -11,27 +14,13 @@ class SignUp(View):
     def get(self, request):
         return render(request, "signup.html", {})
 
-    # get user input form form
     def post(self, request):
-
-        # variables for no existing user and bad password
-        noUser = False
-        badPassword = False
-
-        # check if user exists
-        try:
-            m = Users.objects.get(userName=request.POST['username'])
-            badPassword = (m.password1 != request.POST['pass1'])
-        except:
-            noUser = True
-
+        # get row count of users with Administrator as their group
         rowCount = Users.objects.filter(group='Administrator').count()
 
-        # if new user
+        # if no admin
         if rowCount == 0:
-            # get new sign up info
-            m = Users(userName=request.POST['username'], password1=request.POST['pass1'],
-                      password2=request.POST['pass2'], group='Administrator')
+            # get passwords to check
             p1 = request.POST['pass1']
             p2 = request.POST['pass2']
             # make sure passwords are the same
@@ -39,17 +28,17 @@ class SignUp(View):
                 return render(request, "signup.html", {"message": "Passwords do not match"})
             # if passwords are the same save and redirect to login page
             else:
-                m.save()
-                request.session["username"] = m.userName
+                # create admin account
+                Administrator.create_admin(self, username=request.POST['username'], password=request.POST['pass1'],
+                                           group='Administrator')
                 return redirect('login')
-        elif noUser:
-            return redirect('login')
-        elif badPassword:
-            return render(request, "signup.html", {"message": "bad password"})
         # if user exists redirect to login page
-        else:
-            request.session["username"] = m.userName
+        elif Administrator.check_for_existing_user(self, username=request.POST['username']):
             return render(request, "login.html", {"message": "You have an account. Please log in."})
+        else:
+            # if no user and existing admin account must be created
+            return render(request, "login.html", {"message": "You do not have an account. Contact admin to create your "
+                                                             "account."})
 
 
 class Login(View):
@@ -60,30 +49,27 @@ class Login(View):
 
     # get user input form form
     def post(self, request):
+        # check for existing user
+        if Administrator.check_for_existing_user(self, username=request.POST['username']):
+            u = Users.objects.get(userName=request.POST['username'])
+            badPass = (u.password1 != request.POST['pass1'])
 
-        # vaiables for no existing user and bad password
-        noUser = False
-        badPassword = False
-
-        # check if user exists
-        try:
-            m = Users.objects.get(userName=request.POST['username'])
-            badPassword = (m.password1 != request.POST['pass1'])
-        except:
-            noUser = True
-
-        # if new user
-        if noUser:
-            return render(request, "signup.html", {"message": "Username not found. Please create an account."})
-        elif badPassword:
-            return render(request, "login.html", {"message": "bad password"})
-        # if user exists redirect to homepage
-        elif m.group != 'Administrator':
-            request.session["username"] = m.userName
-            return redirect('userhomepage')
+            #if user exists and wrong password given
+            if badPass:
+                return render(request, "login.html", {"message": "bad password"})
+            # if user exists but is not administrator
+            elif u.group != 'Administrator':
+                request.session["username"] = u.userName
+                return redirect('userhomepage')
+            # if user is administrator
+            else:
+                request.session["username"] = u.userName
+                return redirect('homepage')
         else:
-            request.session["username"] = m.userName
-            return redirect('homepage')
+            # user does not exist
+            return render(request, "login.html", {"message": "Username not found. Please have the Administrator"
+                                                             " create your account."})
+
 
 
 class Homepage(View):
@@ -107,23 +93,15 @@ class AddCourses(View):
         return render(request, "addCourses.html", {})
 
     def post(self, request):
-
-        noCourse = False
-
-        # checking if course already exists
-        try:
-            Courses.objects.get(courseName=request.POST['coursename'])
-        except:
-            noCourse = True
-
-        if noCourse:
-            c = Courses(courseName=request.POST['coursename'], courseNum=request.POST['coursenum'],
-                        courseDay=request.POST['courseday'], courseTime=request.POST['coursetime'])
-            c.save()
-            request.session["coursename"] = c.courseName
-            return redirect('addcourses')
-        else:
+        # check if course exists already
+        if Administrator.check_for_existing_course(self, coursenumber=request.POST['coursenum']):
             return render(request, "addCourses.html", {"message": "Course already exists."})
+        else:
+            # create course if none exists
+            Administrator.create_courses(self, coursename=request.POST['coursename'], coursenumber=request.POST['coursenum'],
+                                         coursetime=request.POST['coursetime'], courseday=request.POST['courseday'])
+            return redirect('addcourses')
+
 
 
 class AddUsers(View):
@@ -133,28 +111,19 @@ class AddUsers(View):
         return render(request, "addUsers.html", {})
 
     def post(self, request):
-
-        noUser = False
-
-        try:
-            Users.objects.get(userName=request.POST['username'])
-        except:
-            noUser = True
-
-        if noUser:
-            u = Users(userName=request.POST['username'], firstName=request.POST['fname'],
-                      lastName=request.POST['lname'], email=request.POST['email'], password1=request.POST['pass1'],
-                      group=request.POST['group'])
-
-            u.save()
-            request.session["username"] = u.userName
-            return redirect('addusers')
+        # check for user in database
+        if Administrator.check_for_existing_user(self, username=request.POST['username']):
+            return render(request, "addUsers.html", {"message": "User already exists."})
         else:
-            return render(request, "addUsers.html", {"message": "User already exists"})
+            # add user if none exists
+            Administrator.create_users(self, username=request.POST['username'], firstname=request.POST['fname'],
+                                       lastname=request.POST['lname'], email=request.POST['email'],
+                                       password=request.POST['pass1'], group=request.POST['group'])
+
+            return redirect('addusers')
 
 
 class ViewCourses(View):
-
     # display add users page
     def get(self, request):
 
@@ -169,6 +138,7 @@ class ViewCourses(View):
 #    def get(self, request, id):
 #        obj = get_object_or_404(Courses, pk=id)
 #        return render(request, 'viewCoursesDetails.html', {'obj': obj})
+
 
 class ViewUsers(View):
 
