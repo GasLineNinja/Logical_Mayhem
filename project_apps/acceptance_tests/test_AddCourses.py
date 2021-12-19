@@ -11,7 +11,7 @@ class MyTestCase(TestCase):
         self.course = Courses.objects.create(courseName='CS361', coursesNum = '1', instructorName="Jason",  viewC='true')
 
     def newUserItems(self):
-        response = self.client.get('/things/', {'name': self.client.name}) #if admin then
+        response = self.client.get('/homepage/', {'name': self.client.name}) #if admin then
         self.assertEqual(response.context['things'], [], msg='users list')
 
         response = self.client.post('addCourses', )  # if correct username and password
