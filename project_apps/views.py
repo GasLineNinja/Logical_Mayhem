@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from classes.Administrator import Administrator
 from classes.Instructor import Instructor
@@ -71,6 +71,7 @@ class Login(View):
                                                              " create your account."})
 
 
+
 class AdminHomepage(View):
 
     # display homepage
@@ -102,6 +103,7 @@ class AddCourses(View):
             return redirect('addcourses')
 
 
+
 class AddUsers(View):
 
     # display add users page
@@ -124,7 +126,18 @@ class AddUsers(View):
 class ViewCourses(View):
     # display add users page
     def get(self, request):
-        return render(request, "", {})
+
+        if (Courses.objects.count() == 0):
+            return render(request, "viewCourses.html", {"message": "No courses have been added yet."})
+        else:
+            obj = Courses.objects.all()
+            return render(request, 'viewCourses.html', {'obj': obj})
+
+
+# class ViewCoursesDetails(View):
+#    def get(self, request, id):
+#        obj = get_object_or_404(Courses, pk=id)
+#        return render(request, 'viewCoursesDetails.html', {'obj': obj})
 
 
 class ViewUsers(View):
@@ -137,7 +150,7 @@ class ViewUsers(View):
 class Assignments(View):
 
     # display add users page
-    def get(self, request):
+    def get(self, request):       
         return render(request, "", {})
 
 
@@ -161,5 +174,10 @@ class EditInfo(View):
             Instructor.edit_info(self, username=request.session['username'], email=request.POST['email'],
                                  phonenumber=request.POST['phonenum'], password=request.POST['pass1'])
             return render(request, "editInfo.html", {"message": "Your information and password hve been updated"})
+        
 
+
+def detail_page(request, id):
+    obj = get_object_or_404(Courses, pk=id)
+    return render(request, 'viewCourseDetails.html', {'obj': obj})
 
