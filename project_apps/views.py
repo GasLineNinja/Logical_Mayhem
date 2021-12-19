@@ -137,30 +137,6 @@ class AddUsers(View):
             request.session["username"] = u.userName
             return redirect('addusers')
 
-        #administrator = Administrator(userName=request.session['username'])
-        #response = administrator.create_users(username=request.POST['username'], firstname=request.POST['fname'],
-        #                                   lastname=request.POST['lname'], email=request.POST['email'],
-        #                                    password=request.POST['pass1'], group=request.POST['group'])
-        #if response:
-        #    return redirect('addusers')
-
-        #noUser = False
-
-        #try:
-        #    Users.objects.get(userName=request.POST['username'])
-        #except:
-        #    noUser = True
-
-        #if noUser:
-        #    u = Users(userName=request.POST['username'], firstName=request.POST['fname'],
-        #              lastName=request.POST['lname'], email=request.POST['email'], password1=request.POST['pass1'],
-        #              group=request.POST['group'])
-
-        #    u.save()
-        #    request.session["username"] = u.userName
-        #    return redirect('addusers')
-        #else:
-        #    return render(request, "addUsers.html", {"message": "User already exists"})
 
 class ViewCourses(View):
     # display add users page
