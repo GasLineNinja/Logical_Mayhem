@@ -1,4 +1,4 @@
-from readPublicContact import ReadPublicContactInterface
+from classes.readPublicContact import ReadPublicContactInterface
 
 class TAReadsContactInfo(object,ReadPublicContactInterface):
     def readPublicContactInfo(viewinfo, information):

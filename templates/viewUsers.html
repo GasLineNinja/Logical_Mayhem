@@ -82,22 +82,21 @@
 	</style>
 </head>
 <body>
-<div class="topnav">
+    <div class="topnav">
     <div class="topnav-centered">
         <a class="active" href={% url 'homepage' %}>Home</a>
 	</div>
     </div>
 	<div class="mainform">
-		<form action={% url 'viewcourses' %} method="post">
+		<form action={% url 'viewusers' %} method="post">
             {% csrf_token %}
 			<fieldset>
 				<p><label class="courselist">User List:</p>
-                {{ message }}
-                {% for x in obj %}
-				<a href ="{% url 'viewCourseDetails' x.id %}"> {{x.courseName}}</a><hr>
+                {% for x in userobj %}
+				<a href ="{% url 'viewUserDetails' x.id %}"> {{x.userName}}</a><hr>
 				{% endfor %}
             </fieldset>
 		</form>
 	</div>
-</body>
-</html>
+	</body>
+	</html>

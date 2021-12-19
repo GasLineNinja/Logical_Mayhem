@@ -1,7 +1,8 @@
 import unittest
 from project_apps.models import Users
 from django.test import Client
-from final_project import editContactInfo
+from classes import editContactInfo
+
 
 class test_ContactInfo(unittest.TestCase):
     def setUp(self):
