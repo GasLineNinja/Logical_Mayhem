@@ -16,25 +16,11 @@ class SignUp(View):
 
     # get user input form form
     def post(self, request):
-
-        # variables for no existing user and bad password
-        noUser = False
-        badPassword = False
-
-        # check if user exists
-        try:
-            m = Users.objects.get(userName=request.POST['username'])
-            badPassword = (m.password1 != request.POST['pass1'])
-        except:
-            noUser = True
-
         rowCount = Users.objects.filter(group='Administrator').count()
 
-        # if new user
+        # if no admin
         if rowCount == 0:
             # get new sign up info
-            m = Users(userName=request.POST['username'], password1=request.POST['pass1'],
-                      password2=request.POST['pass2'], group='Administrator')
             p1 = request.POST['pass1']
             p2 = request.POST['pass2']
             # make sure passwords are the same
@@ -42,17 +28,15 @@ class SignUp(View):
                 return render(request, "signup.html", {"message": "Passwords do not match"})
             # if passwords are the same save and redirect to login page
             else:
-                m.save()
-                request.session["username"] = m.userName
+                Administrator.create_admin(self, username=request.POST['username'], password=request.POST['pass1'],
+                                           group='Administrator')
                 return redirect('login')
-        elif noUser:
-            return redirect('login')
-        elif badPassword:
-            return render(request, "signup.html", {"message": "bad password"})
         # if user exists redirect to login page
-        else:
-            request.session["username"] = m.userName
+        elif Administrator.check_for_existing_user(self, username=request.POST['username']):
             return render(request, "login.html", {"message": "You have an account. Please log in."})
+        else:
+            return render(request, "login.html", {"message": "You do not have an account. Contact admin to create your "
+                                                             "account."})
 
 
 class Login(View):
@@ -102,21 +86,11 @@ class AddCourses(View):
         return render(request, "addCourses.html", {})
 
     def post(self, request):
-        # c = Courses(courseName=request.POST['coursename'], courseNum=request.POST['coursenum'],
-        #            courseDay=request.POST['courseday'], courseTime=request.POST['coursetime'])
-        # if Administrator.create_courses(coursenumber=c.courseNum, coursename=c.courseName, courseday=c.courseDay,
-        #                                coursetime=c.courseTime):
-        #    request.session["coursename"] = c.courseName
-        #    return redirect('addcourses')
-        # else:
-        #    return render(request, "addCourses.html", {"message": "Course already exists."})
         if Administrator.check_for_existing_course(self, coursenumber=request.POST['coursenum']):
             return render(request, "addCourses.html", {"message": "Course already exists."})
         else:
-            c = Courses(courseName=request.POST['coursename'], courseNum=request.POST['coursenum'],
-                        courseDay=request.POST['courseday'], courseTime=request.POST['coursetime'])
-            c.save()
-            request.session["coursename"] = c.courseName
+            Administrator.create_courses(self, coursename=request.POST['coursename'], coursenumber=request.POST['coursenum'],
+                                         coursetime=request.POST['coursetime'], courseday=request.POST['courseday'])
             return redirect('addcourses')
 
 
@@ -130,11 +104,10 @@ class AddUsers(View):
         if Administrator.check_for_existing_user(self, username=request.POST['username']):
             return render(request, "addUsers.html", {"message": "User already exists."})
         else:
-            u = Users(userName=request.POST['username'], firstName=request.POST['fname'],
-                      lastName=request.POST['lname'], email=request.POST['email'], password1=request.POST['pass1'],
-                      group=request.POST['group'])
-            u.save()
-            request.session["username"] = u.userName
+            Administrator.create_users(self, username=request.POST['username'], firstname=request.POST['fname'],
+                                       lastname=request.POST['lname'], email=request.POST['email'],
+                                       password=request.POST['pass1'], group=request.POST['group'])
+
             return redirect('addusers')
 
 
