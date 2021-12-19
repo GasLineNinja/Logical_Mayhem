@@ -31,6 +31,7 @@ urlpatterns = [
     path('view_courses/', ViewCourses.as_view(), name='viewcourses'),
     path('view_course_details/<int:id>', views.detail_page, name='viewCourseDetails'),
     path('view_users/', ViewUsers.as_view(), name='viewusers'),
+    path('view_user_details/<int:id>', views.user_detail_page, name='viewUserDetails'),
     path('user_homepage/', UserHomepage.as_view(), name='userhomepage'),
     path('assignments/', Assignments.as_view(), name='assignments'),
     path('edit_courses/',AddCourses.as_view(), name='editcourses')

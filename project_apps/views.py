@@ -141,10 +141,14 @@ class ViewCourses(View):
 
 
 class ViewUsers(View):
-
     # display add users page
     def get(self, request):
-        return render(request, "", {})
+        userobj = Courses.objects.all()
+        return render(request, 'viewUsers.html', {'userobj': userobj})
+
+def user_detail_page(request, id):
+    userobj = get_object_or_404(Users, pk=id)
+    return render(request, 'viewUserDetails.html', {'userobj': userobj})
 
 
 class Assignments(View):
