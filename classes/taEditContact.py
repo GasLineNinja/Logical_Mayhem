@@ -1,4 +1,4 @@
-from editContactInfo import EditContactInfoInterface
+from classes.editContactInfo import EditContactInfoInterface
 
 class TAEditContact(object, EditContactInfoInterface):
     def __init__(self,editContact, conactInformation):

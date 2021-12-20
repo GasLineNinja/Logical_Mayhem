@@ -1,10 +1,54 @@
-from numpy import msg
-
-from final_project import InstructorviewAssign
 from django.test import TestCase
 from django.test import Client
-from project_apps.models import Users, Courses, CourseAssign
+from project_apps.models import Courses
 
+class unit_tests(TestCase):
+    def test_Inview(self):
+        self.assertEquals(True, InstructorviewAssign(self, True, "Assignments"))
+
+    def test_InviewNumbers(self):
+        with self.assertRaises(BaseException, msg="Does not raise error on numbers"):
+            InstructorviewAssign(self, True, 1234456432)
+
+    def test_InviewChar(self):
+        with self.assertRaises(BaseException, msg="Does not raise error on char"):
+            InstructorviewAssign(self, True, 'a')
+
+    def test_InviewWrongParameters(self):
+        with self.assertRaises(BaseException, msg="Does not raise error on wrong number of parameters"):
+            InstructorviewAssign(self, True)
+
+    def test_InviewWrongParameters(self):
+        with self.assertRaises(BaseException, msg="Does not raise error on wrong number of parameters"):
+            InstructorviewAssign(self)
+
+    def test_InviewWrongParameters(self):
+        with self.assertRaises(BaseException, msg="Does not raise error on wrong number of parameters"):
+            InstructorviewAssign()
+
+    def test_InviewWrongParameters(self):
+        with self.assertRaises(BaseException, msg="Does not raise error on wrong number of parameters"):
+            InstructorviewAssign(self, True, "Assignments", "Assignments")
+
+    def test_InviewassignWrongParameters(self):
+        with self.assertRaises(BaseException, msg="Does not raise error on wrong number of parameters"):
+            InstructorviewAssign.viewAssignments(True)
+
+    def test_InviewassignWrongParameters(self):
+        with self.assertRaises(BaseException, msg="Does not raise error on wrong number of parameters"):
+            InstructorviewAssign.viewAssignments()
+
+    def test_InviewassignWrongParameters(self):
+        with self.assertRaises(BaseException, msg="Does not raise error on wrong number of parameters"):
+            InstructorviewAssign.viewAssignments(True,"Assignment","Assignment")
+
+    def test_InviewassignWrongParameters(self):
+        with self.assertRaises(BaseException, msg="Does not raise error on wrong parameters"):
+            InstructorviewAssign.viewAssignments(12343,False)
+
+    def test_InviewassignWrongParameters(self):
+        with self.assertRaises(BaseException, msg="Does not raise error on wrong parameters"):
+            InstructorviewAssign.viewAssignments("Hello",32234567865432)
 
 class test_init(TestCase):
 

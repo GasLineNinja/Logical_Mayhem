@@ -1,6 +1,6 @@
 from createaccounts import CreateAccountsInterface
 
-class CreateInstructorAccount(CreateAccountsInterface):
+class CreateInstructorAccount(object, CreateAccountsInterface):
     def getAccount(createNewAccount):
         #Precondition: the account holder is an admin
         #Precondition: the createNewAccount is true

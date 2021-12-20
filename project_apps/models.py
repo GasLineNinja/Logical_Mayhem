@@ -18,15 +18,18 @@ class Courses(models.Model):
     courseNum = models.CharField(max_length=4, default=0000)
     courseTime = models.TimeField()
     courseDay = models.CharField(max_length=15, default=None)
-    instructorName = models.CharField(max_length=50)
-    taName = models.CharField(max_length=50)
+    instructorFirstName = models.CharField(max_length=50)
+    instructorLastName = models.CharField(max_length=50)
+    taFirstName = models.CharField(max_length=50)
+    taLastName = models.CharField(max_length=50)
 
 
 class Labs(models.Model):
-    courseName = models.CharField(max_length=100)
+    courseNum = models.CharField(max_length=100)
     labNum = models.IntegerField()
     labTime = models.CharField(max_length=50)
-    taName = models.CharField(max_length=50)
+    taFirstName = models.CharField(max_length=50)
+    taLastName = models.CharField(max_length=50)
 
 
 class CourseAssign(models.Model):
@@ -34,13 +37,3 @@ class CourseAssign(models.Model):
     assignmentNum = models.IntegerField()
     assignment = models.CharField(max_length=50)
     assignment1 = models.CharField(max_length=50)
-
-
-class createAccount(models.Model):
-    isAdmin = models.BooleanField()
-    isIns = models.BooleanField()
-    isTA = models.BooleanField()
-    createNewAccount = models.BooleanField()
-    createUser = models.IntegerField()
-    createPassword = models.CharField(max_length=50)
-    generateID = models.CharField(max_length=50)

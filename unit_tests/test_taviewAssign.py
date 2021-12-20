@@ -1,11 +1,41 @@
-from numpy import msg
-
-from final_project import taViewAssign
 from django.test import TestCase
 from django.test import Client
-from project_apps.models import Users, Courses, CourseAssign
+from project_apps.models import Courses
 
 
+# Unit Tests
+class unit_tests(TestCase):
+
+    def test_TAview(self):
+        self.assertEquals(True,taViewAssign(self,True, "Assignments"))
+
+    def test_TAviewNumbers(self):
+        with self.assertRaises(BaseException,msg="Does not raise error on numbers"):
+            taViewAssign(self, True, 1234456432)
+
+    def test_TAviewChar(self):
+        with self.assertRaises(BaseException,msg="Does not raise error on char"):
+            taViewAssign(self, True, 'a')
+
+    def test_TAviewWrongParameters(self):
+        with self.assertRaises(BaseException,msg="Does not raise error on wrong number of parameters"):
+            taViewAssign(self, True)
+
+    def test_TAviewWrongParameters(self):
+        with self.assertRaises(BaseException,msg="Does not raise error on wrong number of parameters"):
+            taViewAssign(self)
+
+    def test_TAviewWrongParameters(self):
+        with self.assertRaises(BaseException,msg="Does not raise error on wrong number of parameters"):
+            taViewAssign()
+
+    def test_TAviewWrongParameters(self):
+        with self.assertRaises(BaseException,msg="Does not raise error on wrong number of parameters"):
+            taViewAssign(self, True, "Assignments", "Assignments")
+
+
+
+#Acceptance Tests
 class test_init(TestCase):
 
     def setUp(self):
