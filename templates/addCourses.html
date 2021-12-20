@@ -83,8 +83,8 @@
 <body>
     <div class="topnav">
 	<div class="topnav-centered">
-		<a class="active" href={% url 'homepage' %}>Home</a>
-		<a href="">Edit Courses</a>
+		<a class="active" href={% url 'adminhomepage' %}>Home</a>
+		<a href="{% url 'editcourses' %}">Edit Courses</a>
 		<a href={% url 'addusers' %}>Add Users</a>
 	</div>
     </div>
@@ -94,11 +94,11 @@
             {% csrf_token %}
 			<fieldset>
                 <p><label class="coursenum">Course number:   </label><input type="text" name="coursenum" min="100"
-                                                                            max="999" size="3"></p>
-				<p><label class="coursename">Course name:   </label><input type="text" name="coursename" size="50"></p>
+                                                                            max="999" size="3" required></p>
+				<p><label class="coursename">Course name:   </label><input type="text" name="coursename" size="50" required></p>
 				<p><label class="courseday">Course days (U,M,T,W,H,F,S):   </label><input type="text" name="courseday"
-                                                                                          size ="11"></p>
-                <p><label class="coursetime">Course time:   </label><input type="time" name="coursetime" size ="50"></p>
+                                                                                          size ="11" required></p>
+                <p><label class="coursetime">Course time:   </label><input type="time" name="coursetime" size ="50" required></p>
 			</fieldset>
 				<input type="submit" name="submit" value="Submit">
 		</form>

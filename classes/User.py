@@ -7,7 +7,7 @@ class User(ABC):
     def set_username(self, username):
         pass
 
-    def set_password(self, password1):
+    def set_password(self, password):
         pass
 
     def set_first_name(self, firstname):
@@ -25,7 +25,7 @@ class User(ABC):
     def view_users(self, group):
         pass
 
-    def assign_courses(self, coursenumber):
+    def assign_courses(self, coursenumber, labnumber, firstname, lastname):
         pass
 
     def view_course_assignments(self, username, coursename, labnumber):
@@ -39,3 +39,4 @@ class User(ABC):
 
     def check_for_existing_lab(self, coursename, labnumber):
         pass
+

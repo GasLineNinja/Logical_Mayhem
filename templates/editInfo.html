@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>CEAS Course Scheduler</title>
+    <meta charset="UTF-8">
+    <title>CEAS Course Scheduler</title>
     <div class="header">
 		<h1>CEAS Course Scheduler App</h1>
 	</div>
@@ -82,24 +82,29 @@
 </head>
 <body>
     <div class="topnav">
-    <div class="topnav-centered">
-		<a class="active" href={% url 'homepage' %}>Home</a>
-        <a class="active" href={% url 'viewcourses' %}>View Courses</a>
-	</div>
+        <div class="topnav-centered">
+            <a class="active" href={% url 'userhomepage' %}>Home</a>
+            <a href="{% url 'editcourses' %}">Edit Course TAs</a>
+            <a href="{% url 'assignments' %} }}">View Course Assignments</a>
+            <a href="{% url 'viewusers' %}">View Users</a>
+        </div>
     </div>
+	<div class="formheader"><h3>Please fill out user information to update</h3></div>
 	<div class="mainform">
+		<form action={% url 'editinfo' %} method="post">
             {% csrf_token %}
 			<fieldset>
-                <div class="container">
-                Course Number: {{obj.courseNum}}
-                <br><br>Course Name: {{obj.courseName}}
-                <br><br>Course day(s): {{obj.courseDay}}
-                    <br><br>Course time: {{obj.courseTime}}
-                    <!--<h1>Instructor: {{obj.instructorName}}</h1>-->
-                    <!--<h1>TA: {{obj.taName}}</h1>-->
-                </div>
+                <p><label class="firstname">First Name:   </label><input type="text" name="fname" size="25"></p>
+                <p><label class="lastname">Last Name:   </label><input type="text" name="lname" size="25"></p>
+                <p><label class="email">Email:   </label><input type="email" name="email" size ="50"></p>
+                <p><label class="phonenumber">Phone Number:   </label><input type="tel" name="phonenum"></p><br/>
+                <p><label class="password">Password:   </label><input type="password" name="pass1" size="25"></p>
+                <p><label class="cpassword">Confirm Password:   </label><input type="password" name="pass2" size="25"></p>
 			</fieldset>
+				<input type="submit" name="submit" value="Submit">
+                <input type="reset" name="reset" value="reset">
 		</form>
+        {{ message }}
 	</div>
 	</body>
-	</html>
+</html>

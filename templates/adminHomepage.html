@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>CEAS Course Scheduler</title>
+    <meta charset="UTF-8">
+    <<title>CEAS Course Scheduler</title>
     <div class="header">
 		<h1>CEAS Course Scheduler App</h1>
 	</div>
@@ -81,25 +81,19 @@
 	</style>
 </head>
 <body>
+    {% csrf_token %}
     <div class="topnav">
-    <div class="topnav-centered">
-		<a class="active" href={% url 'homepage' %}>Home</a>
-        <a class="active" href={% url 'viewcourses' %}>View Courses</a>
-	</div>
+        <div class="topnav-centered">
+            <a class="active" href={% url 'adminhomepage' %}>Home</a>
+            <a href="{% url 'addcourses' %}">Add Courses</a>
+            <a href="{% url 'addusers' %}">Add Users</a>
+            <a href="{% url 'viewcourses' %}">View Courses</a>
+            <a href="{% url 'viewusers' %}">View Users</a>
+        </div>
     </div>
-	<div class="mainform">
-            {% csrf_token %}
-			<fieldset>
-                <div class="container">
-                Course Number: {{obj.courseNum}}
-                <br><br>Course Name: {{obj.courseName}}
-                <br><br>Course day(s): {{obj.courseDay}}
-                    <br><br>Course time: {{obj.courseTime}}
-                    <!--<h1>Instructor: {{obj.instructorName}}</h1>-->
-                    <!--<h1>TA: {{obj.taName}}</h1>-->
-                </div>
-			</fieldset>
-		</form>
-	</div>
-	</body>
-	</html>
+    <div class="formheader"><h3>Welcome to the Admin Homepage!</h3>
+        <p>Please choose Add Courses or Add users to continue</p>
+    </div>
+        {% csrf_token %}
+</body>
+</html>

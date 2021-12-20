@@ -38,13 +38,13 @@ class Administrator(User, ABC):
         return True
 
     def create_admin(self, username, password, group):
-        user_ref = Users.objects.create(userName=username, password1=password, group=group)
+        user_ref = Users.objects.create(userName=username, password=password, group=group)
         message = f'{user_ref.userName} has been created in the system as Administrator'
         return message
 
     def create_users(self, username, firstname, lastname, email, password, group):
         user_ref = Users.objects.create(userName=username, firstName=firstname, lastName=lastname,
-                                        email=email, password1=password, group=group)
+                                        email=email, password=password, group=group)
         message = f'User with {user_ref.userName} now created in the system'
         return message
 

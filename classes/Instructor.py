@@ -22,6 +22,11 @@ class Instructor(User,ABC):
             return False
         return True
 
+    def edit_info(self, username, firstname, lastname, email, phonenumber, password):
+        Users.objects.filter(userName=username).update(firstName=firstname, lastName=lastname, email=email, phoneNum=phonenumber, password=password)
+        message = f'Your information has been updated'
+        return message
+
     @abstractmethod
     def view_course_assignments(self, username, coursenumber, labnumber):
         list_courses = list(Courses.objects.filter(courseNum=coursenumber, userName=username))
