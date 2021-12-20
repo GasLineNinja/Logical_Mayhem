@@ -4,8 +4,7 @@ from django.db import models
 
 class Users(models.Model):
     userName = models.CharField(max_length=25)
-    password1 = models.CharField(max_length=25)
-    password2 = models.CharField(max_length=25)
+    password = models.CharField(max_length=25)
     firstName = models.CharField(max_length=25)
     lastName = models.CharField(max_length=25)
     phoneNum = models.CharField(max_length=15, default=0)

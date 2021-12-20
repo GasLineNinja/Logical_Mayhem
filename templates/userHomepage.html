@@ -85,10 +85,10 @@
     <div class="topnav">
         <div class="topnav-centered">
             <a class="active" href={% url 'userhomepage' %}>Home</a>
-            <a href="">Edit Info</a>
-            <a href="">Edit Course TAs</a>
-            <a href="">View Course Assignments</a>
-            <a href="">View Users</a>
+            <a href="{% url 'editinfo' %}">Edit Info</a>
+            <a href="{% url 'editcourses' %}">Edit Course TAs</a>
+            <a href="{% url 'assignments' %}">View Course Assignments</a>
+            <a href="{% url 'viewusers' %}">View Users</a>
         </div>
     </div>
     <div class="formheader"><h3>Welcome to your Homepage!</h3>

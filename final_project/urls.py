@@ -15,8 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from project_apps.views import SignUp, Login, Homepage, AddCourses, AddUsers, ViewCourses, ViewUsers, UserHomepage,\
-                               Assignments
+from project_apps.views import SignUp, Login, AdminHomepage, AddCourses, AddUsers, ViewCourses, ViewUsers, UserHomepage,\
+                               Assignments, EditCourses, EditInfo
 from project_apps import views
 
 
@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', SignUp.as_view(), name='signup'),
     path('', Login.as_view(), name='login'),
-    path('homepage/', Homepage.as_view(), name='homepage'),
+    path('homepage/', AdminHomepage.as_view(), name='adminhomepage'),
     path('add_courses/', AddCourses.as_view(), name='addcourses'),
     path('add_users/', AddUsers.as_view(), name='addusers'),
     path('view_courses/', ViewCourses.as_view(), name='viewcourses'),
@@ -34,5 +34,6 @@ urlpatterns = [
     path('view_user_details/<int:id>', views.user_detail_page, name='viewUserDetails'),
     path('user_homepage/', UserHomepage.as_view(), name='userhomepage'),
     path('assignments/', Assignments.as_view(), name='assignments'),
-    path('edit_courses/',UserHomepage.as_view(), name='editcourses')
+    path('edit_courses/', EditCourses.as_view(), name='editcourses'),
+    path('edit_info/', EditInfo.as_view(), name='editinfo'),
 ]
