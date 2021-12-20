@@ -162,14 +162,28 @@ class EditInfo(View):
     def post(self, request):
         p1 = request.POST['pass1']
         p2 = request.POST['pass2']
+        e = request.POST['email']
+        p = request.POST['phonenum']
         u = Users.objects.get(userName=request.session['username'])
 
         if p1 != p2:
             return render(request, "editInfo.html", {"message": "Passwords do not match"})
-        elif not p1:
-            Instructor.edit_info(self, username=request.session['username'], email=request.POST['email'],
+        elif not p1 and not e:
+            Instructor.edit_info(self, username=request.session['username'], email=u.email,
                                  phonenumber=request.POST['phonenum'], password=u.password)
             return render(request, "editInfo.html", {"message": "Your information has been updated"})
+        elif not p1 and not p:
+            Instructor.edit_info(self, username=request.session['username'], email=request.POST['email'],
+                                 phonenumber=u.phoneNum, password=u.password)
+            return render(request, "editInfo.html", {"message": "Your information has been updated"})
+        elif not e:
+            Instructor.edit_info(self, username=request.session['username'], email=u.email,
+                                 phonenumber=request.POST['phonenum'], password=request.POST['pass1'])
+            return render(request, "editInfo.html", {"message": "Your information and password hve been updated"})
+        elif not p:
+            Instructor.edit_info(self, username=request.session['username'], email=request.POST['email'],
+                                 phonenumber=u.phoneNum, password=request.POST['pass1'])
+            return render(request, "editInfo.html", {"message": "Your information and password hve been updated"})
         else:
             Instructor.edit_info(self, username=request.session['username'], email=request.POST['email'],
                                  phonenumber=request.POST['phonenum'], password=request.POST['pass1'])
