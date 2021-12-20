@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from project_apps.views import SignUp, Login, AdminHomepage, AddCourses, AddUsers, ViewCourses, ViewUsers, UserHomepage, \
-    Assignments, EditInfo
+    Assignments, EditInfo, EditCourses
 from project_apps import views
 
 
@@ -34,7 +34,7 @@ urlpatterns = [
     path('view_users/', ViewUsers.as_view(), name='viewusers'),
     path('user_homepage/', UserHomepage.as_view(), name='userhomepage'),
     path('assignments/', Assignments.as_view(), name='assignments'),
-    path('edit_info/', EditInfo.as_view(), name='editinfo')
-    path('edit_courses/',AddCourses.as_view(), name='editcourses')
+    path('edit_info/', EditInfo.as_view(), name='editinfo'),
+    path('edit_courses/', EditCourses.as_view(), name='editcourses')
 
 ]

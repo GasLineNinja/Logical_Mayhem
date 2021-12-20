@@ -174,10 +174,19 @@ class EditInfo(View):
             Instructor.edit_info(self, username=request.session['username'], email=request.POST['email'],
                                  phonenumber=request.POST['phonenum'], password=request.POST['pass1'])
             return render(request, "editInfo.html", {"message": "Your information and password hve been updated"})
-        
 
 
 def detail_page(request, id):
     obj = get_object_or_404(Courses, pk=id)
     return render(request, 'viewCourseDetails.html', {'obj': obj})
+
+
+class EditCourses(View):
+
+    # display add courses page
+    def get(self, request):
+        pass
+
+    def post(self, request):
+        pass
 
